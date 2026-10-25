@@ -497,7 +497,7 @@ button {
   perspective: 1600px;
   touch-action: pan-y;
   -webkit-tap-highlight-color: transparent;
-  text-align: left;
+  text-align: center;
 }
 
 .card:focus-visible {
@@ -549,6 +549,7 @@ button {
   flex: none;
   display: flex;
   align-items: center;
+  justify-content: center;
   min-height: 52px;
   padding: 10px 20px;
   background: var(--topic);
@@ -825,31 +826,12 @@ kbd {
   }
 }
 
-/* ---------- Reduced motion: fade instead of 3D flip ---------- */
+/* ---------- Reduced motion: quicker flip, fewer other animations ---------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .card-inner,
-  .card.is-flipped .card-inner {
-    transform: none;
-    transition: none;
-  }
-
-  .face,
-  .face-front,
-  .face-back {
-    transform: none;
-    transition: opacity 0.25s ease, visibility 0.25s;
-  }
-
-  .face-back,
-  .card.is-flipped .face-front {
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  .card.is-flipped .face-back {
-    opacity: 1;
-    visibility: visible;
+  /* The card still flips, but quickly and without the springy ease. */
+  .card-inner {
+    transition: transform 0.3s ease-in-out;
   }
 
   .card-stage.enter-next .card,
