@@ -113,6 +113,7 @@
     cerTopic: $('cer-topic'),
     cerSituation: $('cer-situation'),
     cerTitle: $('cer-title'),
+    cerSource: $('cer-source'),
     cerBoard: document.querySelector('.cer-board'),
     poolHint: $('pool-hint'),
     chips: {
@@ -706,6 +707,7 @@
         id: q.id,
         topicOrder: Number(q.topicOrder),
         situation: typeof q.situation === 'string' ? q.situation : '',
+        source: typeof q.source === 'string' ? q.source : '',
         question: q.question,
         statements: q.statements.filter(function (st) {
           return st && typeof st.text === 'string' && CER_PARTS.hasOwnProperty(st.part);
@@ -754,7 +756,7 @@
       var meta = document.createElement('span');
       meta.className = 'topic-meta';
       var topicEl = document.createElement('span');
-      topicEl.textContent = topic.name;
+      topicEl.textContent = q.source || topic.name;
       var statusEl = document.createElement('span');
       statusEl.className = store.cer[q.id] ? 'topic-resume' : '';
       statusEl.textContent = cerResultText(store.cer[q.id]);
@@ -799,6 +801,8 @@
     el.cerSituation.textContent = q.situation;
     el.cerSituation.hidden = !q.situation;
     el.cerTitle.textContent = q.question;
+    el.cerSource.textContent = q.source;
+    el.cerSource.hidden = !q.source;
     el.cerCount.textContent = 'Question ' + (cer.pos + 1) + ' of ' + cerQuestions.length;
     setCerFeedback('', '');
     el.cerCheck.hidden = false;

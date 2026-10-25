@@ -2,242 +2,416 @@
 // edit cer-questions.json, then run `node build-cards.js`.
 window.CER_QUESTIONS = [
   {
-    "id": "cer-01",
+    "id": "ws1-q6",
     "topicOrder": 1,
-    "situation": "Ali's toy robot can walk and make sounds. He watched it closely for a month.",
-    "question": "Is the toy robot a living thing?",
+    "source": "Worksheet 1, Question 6",
+    "situation": "Dave set up two containers, A and B, near the window. Both had water, fishes and a lid. Container B also had an air pump, but container A did not. He fed the fishes daily. After one week, all the fishes in container B were still alive, but some fishes in container A had died.",
+    "question": "Give a reason why some fishes in container A died.",
     "statements": [
       {
-        "text": "The robot did not grow bigger during the month.",
+        "text": "Container A did not have an air pump to provide air.",
         "part": "E"
       },
       {
-        "text": "Living things grow and reproduce. The robot does neither, so it is a non-living thing.",
+        "text": "The fishes in container A do not have enough air (dissolved oxygen), so they died.",
         "part": "R"
       },
       {
-        "text": "The toy robot is not a living thing.",
+        "text": "Some fishes in container A died.",
         "part": "C"
       },
       {
-        "text": "The robot cannot make more robots on its own.",
+        "text": "All the fishes in container B, which had an air pump, stayed alive.",
         "part": "E"
       }
     ]
   },
   {
-    "id": "cer-02",
+    "id": "ws1-q7",
+    "topicOrder": 1,
+    "source": "Worksheet 1, Question 7",
+    "situation": "Tim placed two hamsters with the same amount of food into two identical transparent plastic boxes. Both boxes had lids with holes. He placed water in Box A only, and then placed both boxes in the living room.",
+    "question": "What will happen to the hamster in Box B after 10 days? Explain your answer.",
+    "statements": [
+      {
+        "text": "Although the hamster in Box B had food and air, it did not receive water, which it needs to survive, so it died.",
+        "part": "R"
+      },
+      {
+        "text": "The hamster in Box B will die.",
+        "part": "C"
+      },
+      {
+        "text": "The hamster in Box B has no water.",
+        "part": "E"
+      }
+    ]
+  },
+  {
+    "id": "ws2-1-q5",
     "topicOrder": 2,
-    "situation": "Mei put two similar plants in pots. Plant A was placed near a sunny window. Plant B was kept in a dark cupboard. Both were watered every day for one week.",
-    "question": "Do plants need sunlight to stay healthy?",
+    "source": "Worksheet 2.1, Question 5",
+    "situation": "James observed a chilli plant. It had leaves, a stem and many fruits hanging from it. He concluded that it is a non-flowering plant.",
+    "question": "Is his conclusion correct? Explain your answer.",
     "statements": [
       {
-        "text": "Plants use sunlight to make their own food through photosynthesis. Without sunlight, Plant B could not make food.",
-        "part": "R"
-      },
-      {
-        "text": "Plant B turned yellow and drooped.",
+        "text": "The plant has fruits.",
         "part": "E"
       },
       {
-        "text": "Plants need sunlight to stay healthy.",
+        "text": "No. His conclusion is incorrect.",
         "part": "C"
       },
       {
-        "text": "Plant A stayed green and grew taller.",
+        "text": "Fruits develop from flowers, so it is a flowering plant.",
+        "part": "R"
+      }
+    ]
+  },
+  {
+    "id": "ws2-1-q6",
+    "topicOrder": 2,
+    "source": "Worksheet 2.1, Question 6(b)",
+    "situation": "Samantha observed a plant with leaves, a stem, roots and a fruit. She concluded that it is a flowering plant.",
+    "question": "Is her conclusion correct? Explain your answer.",
+    "statements": [
+      {
+        "text": "Only flowering plants can produce fruits, so it is a flowering plant.",
+        "part": "R"
+      },
+      {
+        "text": "Yes. Her conclusion is correct.",
+        "part": "C"
+      },
+      {
+        "text": "The plant has a fruit.",
         "part": "E"
       }
     ]
   },
   {
-    "id": "cer-03",
+    "id": "ws2-2-q7",
     "topicOrder": 3,
-    "situation": "Lily saw an animal in the park. It had a beak, two legs and its body was covered in feathers.",
-    "question": "Which animal group does this animal belong to?",
+    "source": "Worksheet 2.2, Question 7",
+    "situation": "Melvin found Animal X in a garden. Animal X has 3 body parts, 3 pairs of legs and 1 pair of feelers. He concluded that it is an insect.",
+    "question": "Is Melvin's conclusion correct? Explain your answer.",
     "statements": [
       {
-        "text": "Its body was covered in feathers.",
+        "text": "Animal X has 3 pairs of legs.",
         "part": "E"
       },
       {
-        "text": "The animal is a bird.",
-        "part": "C"
+        "text": "Insects have 3 body parts, 3 pairs of legs and 1 pair of feelers, so Animal X is an insect.",
+        "part": "R"
       },
       {
-        "text": "Feathers are the outer covering of birds. No other animal group has feathers.",
-        "part": "R"
+        "text": "Animal X has 3 body parts and 1 pair of feelers.",
+        "part": "E"
+      },
+      {
+        "text": "Yes. Melvin's conclusion is correct.",
+        "part": "C"
       }
     ]
   },
   {
-    "id": "cer-04",
+    "id": "ws2-2-q8",
+    "topicOrder": 3,
+    "source": "Worksheet 2.2, Question 8",
+    "situation": "Katelyn observed animal Z. She wrote in her Science Journal that animal Z has moist skin, lays eggs and can live on land and in water. She concluded that animal Z could be a reptile.",
+    "question": "Is her conclusion accurate? Explain your answer.",
+    "statements": [
+      {
+        "text": "Animal Z can live on land and in water.",
+        "part": "E"
+      },
+      {
+        "text": "No. Her conclusion is not accurate.",
+        "part": "C"
+      },
+      {
+        "text": "Reptiles have dry, scaly skin. Animals with moist skin that can live on land and in water are amphibians, so animal Z is an amphibian.",
+        "part": "R"
+      },
+      {
+        "text": "Animal Z has moist skin.",
+        "part": "E"
+      }
+    ]
+  },
+  {
+    "id": "ws2-2-see1",
+    "topicOrder": 3,
+    "source": "Worksheet 2.2, SEE Situation 1",
+    "situation": "Millipedes are often seen on concrete pavements after a heavy rain.",
+    "question": "Why are millipedes often seen on pavements after a heavy rain?",
+    "statements": [
+      {
+        "text": "Millipedes live in damp soil and need air to survive. Flooded soil has very little air, so they move above the soil onto the pavement to get air.",
+        "part": "R"
+      },
+      {
+        "text": "Millipedes move out of the soil onto the pavement after a heavy rain.",
+        "part": "C"
+      },
+      {
+        "text": "After a heavy rain, the soil is flooded with water.",
+        "part": "E"
+      }
+    ]
+  },
+  {
+    "id": "ws2-2-see2",
+    "topicOrder": 3,
+    "source": "Worksheet 2.2, SEE Situation 2",
+    "situation": "We breathe in oxygen, and so does a fish. There is oxygen in water. However, we cannot breathe when we are in the water, yet a fish can.",
+    "question": "Why can a fish breathe in water but we cannot?",
+    "statements": [
+      {
+        "text": "A fish has gills.",
+        "part": "E"
+      },
+      {
+        "text": "Gills can take in the oxygen dissolved in water. The human lung is not able to take in dissolved oxygen, so we cannot breathe in water.",
+        "part": "R"
+      },
+      {
+        "text": "Humans breathe with lungs.",
+        "part": "E"
+      },
+      {
+        "text": "A fish can take in oxygen from water, but humans cannot.",
+        "part": "C"
+      }
+    ]
+  },
+  {
+    "id": "ws2-3-q5a",
     "topicOrder": 4,
-    "situation": "Ravi left one slice of bread in a warm, damp cupboard and another slice in the fridge for 5 days.",
-    "question": "Does mould grow better on bread kept in a warm place?",
+    "source": "Worksheet 2.3, Question 5(a)",
+    "situation": "John and Ahmad came across living thing M growing on a tree stump in a forest. M has a cap and a stalk. John told Ahmad that M is a plant.",
+    "question": "Is John correct? Explain your answer.",
     "statements": [
       {
-        "text": "The bread in the fridge had no mould.",
-        "part": "E"
-      },
-      {
-        "text": "Mould grows better on bread kept in a warm place.",
-        "part": "C"
-      },
-      {
-        "text": "Mould is a fungus. It feeds on the bread and grows faster where it is warm and damp.",
+        "text": "Only plants have green leaves to make their own food.",
         "part": "R"
       },
       {
-        "text": "The bread in the warm cupboard had many patches of mould.",
+        "text": "No. M is not a plant.",
+        "part": "C"
+      },
+      {
+        "text": "M does not have green leaves.",
         "part": "E"
       }
     ]
   },
   {
-    "id": "cer-05",
-    "topicOrder": 5,
-    "situation": "Siti looked closely at her mug. The body of the mug is shiny and hard. The handle is light and smooth.",
-    "question": "Is the mug made of more than one material?",
+    "id": "ws2-3-q5b",
+    "topicOrder": 4,
+    "source": "Worksheet 2.3, Question 5(b)",
+    "situation": "Mushrooms are usually found growing on dead animals and plants.",
+    "question": "Explain why mushrooms are usually found on dead animals and plants.",
     "statements": [
       {
-        "text": "The handle of the mug is made of plastic.",
+        "text": "Mushrooms do not have green leaves.",
         "part": "E"
       },
       {
-        "text": "An object can be made of one or more materials. The mug uses two different materials.",
+        "text": "Mushrooms cannot make their own food, so they feed on dead plants and animals.",
         "part": "R"
       },
       {
-        "text": "The body of the mug is made of metal.",
-        "part": "E"
-      },
-      {
-        "text": "The mug is made of more than one material.",
+        "text": "Mushrooms grow on dead plants and animals to get their food.",
         "part": "C"
       }
     ]
   },
   {
-    "id": "cer-06",
+    "id": "ws2-3-q6b",
+    "topicOrder": 4,
+    "source": "Worksheet 2.3, Question 6(b)",
+    "situation": "Priya left two similar slices of bread in two identical jars, P and Q. She added 10 ml of water to the bread in Jar P and 5 ml of water to the bread in Jar Q. She covered the jars to make them airtight. After a few days, the bread in Jar P was very mouldy and the bread in Jar Q was a little mouldy.",
+    "question": "Explain why there is a difference in the amount of mould that grew on the bread in Jar P and the bread in Jar Q.",
+    "statements": [
+      {
+        "text": "The bread in Jar P had 10 ml of water, but the bread in Jar Q had only 5 ml of water.",
+        "part": "E"
+      },
+      {
+        "text": "More mould grew on the bread in Jar P than on the bread in Jar Q.",
+        "part": "C"
+      },
+      {
+        "text": "Mould needs water to grow. The bread in Jar P had more water, so more mould grew on it.",
+        "part": "R"
+      }
+    ]
+  },
+  {
+    "id": "ws2-3-q6c",
+    "topicOrder": 4,
+    "source": "Worksheet 2.3, Question 6(c)",
+    "situation": "Priya toasted a third piece of bread and placed it in another airtight jar.",
+    "question": "What would she observe after a few days? Explain your answer.",
+    "statements": [
+      {
+        "text": "Mould needs water to grow. Without enough water, mould cannot grow well on the toasted bread.",
+        "part": "R"
+      },
+      {
+        "text": "Toasting makes the bread dry, so it has very little water.",
+        "part": "E"
+      },
+      {
+        "text": "There would be little or no mould on the toasted bread.",
+        "part": "C"
+      }
+    ]
+  },
+  {
+    "id": "ws2-3-q7b",
+    "topicOrder": 4,
+    "source": "Worksheet 2.3, Question 7(b)",
+    "situation": "Andy placed a slice of cheese in each of two glass jars and left both jars under the sun. Jar P had an airtight cover. Jar Q was left open. After two days, he counted the green patches on each cheese: set-up P had 3 and set-up Q had 9.",
+    "question": "Explain why there were more green patches growing on the cheese in set-up Q than P.",
+    "statements": [
+      {
+        "text": "Set-up Q was left open, while set-up P had an airtight cover.",
+        "part": "E"
+      },
+      {
+        "text": "Mould needs air to grow. Mould spores in the air could also land on the cheese in the open jar, so more mould grew in set-up Q.",
+        "part": "R"
+      },
+      {
+        "text": "Set-up Q had 9 green patches, but set-up P had only 3.",
+        "part": "E"
+      },
+      {
+        "text": "More mould grew on the cheese in set-up Q because it was not covered.",
+        "part": "C"
+      }
+    ]
+  },
+  {
+    "id": "ws2-3-q7c",
+    "topicOrder": 4,
+    "source": "Worksheet 2.3, Question 7(c)",
+    "situation": "Storing food in airtight packaging prevents green patches of mould from growing on food.",
+    "question": "Explain why this is so.",
+    "statements": [
+      {
+        "text": "Mould needs air to grow. Airtight packaging also stops mould spores in the air from landing on the food.",
+        "part": "R"
+      },
+      {
+        "text": "Airtight packaging does not let air reach the food.",
+        "part": "E"
+      },
+      {
+        "text": "Airtight packaging keeps mould from growing on food.",
+        "part": "C"
+      }
+    ]
+  },
+  {
+    "id": "ws2-3-q8a",
+    "topicOrder": 4,
+    "source": "Worksheet 2.3, Question 8(a)",
+    "situation": "Two similar pieces of raw meat were stored for two hours, one in a freezer (low temperature) and one in a kitchen cupboard (room temperature). The number of harmful bacteria on the meat in the freezer went from 10 at 1 pm, to 11 at 2 pm, to 12 at 3 pm. In the kitchen cupboard, it went from 10, to 30, to 50.",
+    "question": "Which place is more suitable to store raw meat? Explain your answer.",
+    "statements": [
+      {
+        "text": "In the kitchen cupboard, the number of bacteria went up from 10 to 50.",
+        "part": "E"
+      },
+      {
+        "text": "The freezer is more suitable for storing raw meat.",
+        "part": "C"
+      },
+      {
+        "text": "Bacteria reproduce slowly at low temperatures. With fewer harmful bacteria, the meat is less likely to go bad or make us sick.",
+        "part": "R"
+      },
+      {
+        "text": "In the freezer, the number of bacteria only went up from 10 to 12.",
+        "part": "E"
+      }
+    ]
+  },
+  {
+    "id": "ws3-q7a",
     "topicOrder": 6,
-    "situation": "Jun dropped 5 drops of water onto a piece of cloth, a piece of paper and a plastic sheet.",
-    "question": "Which material is best for making an umbrella?",
+    "source": "Worksheet 3, Question 7(a)",
+    "situation": "David wanted to find out which material he should use to make an umbrella. He placed pieces of materials A, B and C over three glass containers and poured 10 ml of tap water into each container. After ten minutes, Material A was dry, while Materials B and C were wet.",
+    "question": "Which material, A, B or C, would be most suitable for making an umbrella? Give a reason for your choice.",
     "statements": [
       {
-        "text": "The cloth and the paper soaked up the water.",
+        "text": "Materials B and C became wet.",
         "part": "E"
       },
       {
-        "text": "Plastic is the best material for making an umbrella.",
-        "part": "C"
-      },
-      {
-        "text": "The water stayed on top of the plastic sheet.",
-        "part": "E"
-      },
-      {
-        "text": "Plastic is waterproof because it does not absorb water, so it keeps us dry.",
-        "part": "R"
-      }
-    ]
-  },
-  {
-    "id": "cer-07",
-    "topicOrder": 7,
-    "situation": "Hana placed 10 green bean seeds on wet cotton wool and 10 green bean seeds on dry cotton wool. Both dishes were kept in the same warm place.",
-    "question": "Do seeds need water to germinate?",
-    "statements": [
-      {
-        "text": "Seeds need water, oxygen and warmth to germinate. The seeds on dry cotton wool had no water.",
+        "text": "Material A is waterproof. It does not let water through, so it will keep the user dry.",
         "part": "R"
       },
       {
-        "text": "The seeds on dry cotton wool did not germinate.",
-        "part": "E"
-      },
-      {
-        "text": "Seeds need water to germinate.",
+        "text": "Material A is the most suitable for making an umbrella.",
         "part": "C"
       },
       {
-        "text": "The seeds on wet cotton wool germinated after 3 days.",
+        "text": "Material A stayed dry after ten minutes.",
         "part": "E"
       }
     ]
   },
   {
-    "id": "cer-08",
-    "topicOrder": 8,
-    "situation": "Daniel watched mosquitoes in a container of water for two weeks.",
-    "question": "How many stages are there in the life cycle of a mosquito?",
+    "id": "ws3-q8b",
+    "topicOrder": 6,
+    "source": "Worksheet 3, Question 8(b)",
+    "situation": "Carol tied strings made of materials Q, R and S to a retort stand. She kept adding weights until each string broke. Material S broke at 20 g. Material R broke at 30 g. Material Q did not break, even at 50 g.",
+    "question": "Which material, Q, R or S, can be used to make a basket that can carry some sweets that weigh 40 g? Explain your answer.",
     "statements": [
       {
-        "text": "The larvae changed into pupae.",
-        "part": "E"
-      },
-      {
-        "text": "Animals that go through the egg, larva, pupa and adult stages have a 4-stage life cycle.",
+        "text": "Material Q is strong enough to hold more than 40 g without breaking, so the basket will not break.",
         "part": "R"
       },
       {
-        "text": "Eggs on the water hatched into larvae.",
+        "text": "Material R broke at 30 g and Material S broke at 20 g.",
         "part": "E"
       },
       {
-        "text": "The mosquito has a 4-stage life cycle.",
+        "text": "Material Q can be used to make the basket.",
         "part": "C"
       },
       {
-        "text": "Adult mosquitoes came out of the pupae.",
+        "text": "Material Q did not break even with 50 g of weights.",
         "part": "E"
       }
     ]
   },
   {
-    "id": "cer-09",
-    "topicOrder": 9,
-    "situation": "Aisha brought a magnet near an iron nail and a copper coin.",
-    "question": "Does a magnet attract all metals?",
+    "id": "ws3-q9b",
+    "topicOrder": 6,
+    "source": "Worksheet 3, Question 9(b)",
+    "situation": "De Ming placed strips of materials J and K, of the same length and breadth, on two wooden blocks 20 cm apart. He added 10 kg weights one at a time until each strip started to bend. Material J bent when 2 weights were on it. Material K bent only when 7 weights were on it. De Ming weighs 40 kg.",
+    "question": "Which material, J or K, is more suitable to be used to make the springboard so that it is safe for De Ming to use it to jump into the pool? Explain your answer.",
     "statements": [
       {
-        "text": "The magnet did not attract the copper coin, even though copper is a metal.",
-        "part": "E"
-      },
-      {
-        "text": "Magnets only attract magnetic materials such as iron, steel, nickel and cobalt. Copper is not a magnetic material.",
-        "part": "R"
-      },
-      {
-        "text": "The magnet attracted the iron nail.",
-        "part": "E"
-      },
-      {
-        "text": "A magnet does not attract all metals.",
-        "part": "C"
-      }
-    ]
-  },
-  {
-    "id": "cer-10",
-    "topicOrder": 10,
-    "situation": "Ken made an electromagnet with an iron nail, a battery and wire. He counted how many paper clips it could pick up.",
-    "question": "Does the number of turns of wire change the strength of an electromagnet?",
-    "statements": [
-      {
-        "text": "With 20 turns of wire, the electromagnet picked up 9 paper clips.",
-        "part": "E"
-      },
-      {
-        "text": "More turns of wire make an electromagnet stronger.",
+        "text": "Material K is more suitable for making the springboard.",
         "part": "C"
       },
       {
-        "text": "With 10 turns of wire, the electromagnet picked up 4 paper clips.",
+        "text": "Material J started to bend with only 2 weights (20 kg).",
         "part": "E"
       },
       {
-        "text": "More turns of wire give the electromagnet a stronger magnetic force, so it can attract more paper clips.",
+        "text": "Material K is stronger. It can support De Ming's weight of 40 kg, so the springboard will not break when he uses it.",
         "part": "R"
+      },
+      {
+        "text": "Material K only started to bend with 7 weights (70 kg).",
+        "part": "E"
       }
     ]
   }

@@ -79,6 +79,9 @@ cer.forEach((q, i) => {
   ['id', 'situation', 'question'].forEach((field) => {
     if (!isText(q[field])) fail(where + ' is missing "' + field + '".');
   });
+  if (q.source !== undefined && typeof q.source !== 'string') {
+    fail(where + ' has a "source" that is not text.');
+  }
   if (seenCerIds.has(q.id)) fail(where + ' uses an id that is already taken.');
   seenCerIds.add(q.id);
   if (!topicNames.has(q.topicOrder)) {

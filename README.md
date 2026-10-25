@@ -92,22 +92,25 @@ Evidence and Reasoning. The questions are in `cer-questions.json`:
 
 ```json
 {
-  "id": "cer-02",
+  "id": "ws2-1-q5",
   "topicOrder": 2,
-  "situation": "Mei put two similar plants in pots. ...",
-  "question": "Do plants need sunlight to stay healthy?",
+  "source": "Worksheet 2.1, Question 5",
+  "situation": "James observed a chilli plant. It had leaves, a stem and many fruits ...",
+  "question": "Is his conclusion correct? Explain your answer.",
   "statements": [
-    { "text": "Plants use sunlight to make their own food ...", "part": "R" },
-    { "text": "Plant B turned yellow and drooped.", "part": "E" },
-    { "text": "Plants need sunlight to stay healthy.", "part": "C" },
-    { "text": "Plant A stayed green and grew taller.", "part": "E" }
+    { "text": "The plant has fruits.", "part": "E" },
+    { "text": "No. His conclusion is incorrect.", "part": "C" },
+    { "text": "Fruits develop from flowers, so it is a flowering plant.", "part": "R" }
   ]
 }
 ```
 
 - `topicOrder` – which flashcard topic the question belongs to. It decides
   the colour and the order of the questions.
+- `source` – optional; where the question comes from, e.g. a worksheet
+  number. It is shown under the question.
 - `situation` – the experiment or observation the student reads first.
+  Students can't see the worksheet's diagrams, so describe what they show.
 - `question` – the question the claim answers.
 - `statements` – each has the `text` and its `part`: `"C"` (claim), `"E"`
   (evidence) or `"R"` (reasoning). Every question needs at least one of each.
