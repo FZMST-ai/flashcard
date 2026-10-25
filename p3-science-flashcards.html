@@ -1,0 +1,2067 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Flashcards to help Primary 3 students revise Science topics.">
+  <title>P3 Science Flashcards</title>
+  <style>
+/* P3 Science Flashcards */
+
+:root {
+  --bg: #f3f5f9;
+  --surface: #ffffff;
+  --surface-2: #eef2f8;
+  --answer-bg: #f6f9ff;
+  --text: #1a1d23;
+  --muted: #4d5563;
+  --border: #d5dbe5;
+  --shadow: 0 10px 30px rgba(20, 30, 50, 0.12), 0 2px 6px rgba(20, 30, 50, 0.08);
+  --focus: #1d4ed8;
+  --primary: #1d4ed8;
+  --primary-hover: #1e40af;
+  --known: #1b7a3a;
+  --known-hover: #166230;
+  --learning: #ffc94d;
+  --learning-hover: #f5b923;
+  --learning-text: #1a1d23;
+  --danger: #b91c1c;
+  --track: #dfe4ec;
+  --radius: 18px;
+  --card-radius: 24px;
+  --topic: #455a64;
+
+  --font: ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Segoe UI",
+    system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  color-scheme: light;
+}
+
+/* Dark theme: follows the device setting unless a light theme is chosen
+   explicitly with data-theme="light"; data-theme="dark" forces it on. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111418;
+    --surface: #1b1f26;
+    --surface-2: #252b34;
+    --answer-bg: #1f2530;
+    --text: #eef1f5;
+    --muted: #b4bcc8;
+    --border: #353d49;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+    --focus: #8ab4ff;
+    --primary: #2f5fe0;
+    --primary-hover: #3d6cf0;
+    --known: #1b7a3a;
+    --known-hover: #208a43;
+    --track: #303742;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #111418;
+  --surface: #1b1f26;
+  --surface-2: #252b34;
+  --answer-bg: #1f2530;
+  --text: #eef1f5;
+  --muted: #b4bcc8;
+  --border: #353d49;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --focus: #8ab4ff;
+  --primary: #2f5fe0;
+  --primary-hover: #3d6cf0;
+  --known: #1b7a3a;
+  --known-hover: #208a43;
+  --track: #303742;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.125rem;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2 {
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1:focus,
+h2:focus {
+  outline: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Layout ---------- */
+
+#app {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: max(16px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right))
+    max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+}
+
+.screen-narrow {
+  max-width: 560px;
+  margin: 0 auto;
+  padding-top: 8vh;
+  text-align: center;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1.125rem;
+  margin: 0.5rem 0 1.5rem;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  min-height: 56px;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease, transform 0.1s ease, border-color 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--surface-2);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: transparent;
+}
+
+.btn-ghost:hover {
+  background: var(--surface-2);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff;
+}
+
+.btn-known {
+  background: var(--known);
+  color: #fff;
+}
+
+.btn-known:hover {
+  background: var(--known-hover);
+}
+
+.btn-learning {
+  background: var(--learning);
+  color: var(--learning-text);
+}
+
+.btn-learning:hover {
+  background: var(--learning-hover);
+}
+
+.btn-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-stack {
+  display: grid;
+  gap: 12px;
+  margin-top: 1.5rem;
+}
+
+.link-btn {
+  background: none;
+  border: 0;
+  padding: 12px 8px;
+  min-height: 48px;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.link-btn:hover {
+  color: var(--text);
+}
+
+/* ---------- Home ---------- */
+
+.home-header {
+  padding: 1rem 0 0.25rem;
+}
+
+.home-header h1 {
+  font-size: clamp(1.75rem, 1.2rem + 2.5vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.btn-study-all {
+  flex-direction: column;
+  gap: 2px;
+  min-height: 72px;
+  font-size: 1.375rem;
+  border-radius: var(--radius);
+}
+
+.btn-study-all-meta {
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.92;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+}
+
+.topic-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.topic-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-height: 84px;
+  padding: 14px 16px 14px 14px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 8px solid var(--topic);
+  border-radius: var(--radius);
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+}
+
+.topic-btn:hover {
+  background: var(--surface-2);
+}
+
+.topic-btn:active {
+  transform: scale(0.99);
+}
+
+.topic-num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--topic);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.125rem;
+}
+
+.topic-main {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.topic-name {
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.25;
+}
+
+.topic-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.topic-resume {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.bar {
+  display: block;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--track);
+  overflow: hidden;
+}
+
+.bar-fill {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: var(--topic);
+  transition: width 0.4s ease;
+}
+
+.topic-chevron {
+  flex: none;
+  font-size: 1.5rem;
+  color: var(--muted);
+}
+
+.reset-area {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.reset-confirm {
+  margin: 0.5rem auto 0;
+  max-width: 480px;
+  padding: 16px;
+  border: 2px solid var(--danger);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.reset-confirm p {
+  margin: 0 0 12px;
+}
+
+.reset-confirm .btn-row {
+  justify-content: center;
+}
+
+.reset-done {
+  min-height: 1.5em;
+  margin: 0.5rem 0 0;
+  color: var(--muted);
+}
+
+.storage-note {
+  margin: 1rem 0 0;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* ---------- Study ---------- */
+
+.study-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: -4px -8px 4px;
+}
+
+.btn-back {
+  min-height: 48px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+}
+
+.study-mode {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-align: right;
+  padding-right: 8px;
+}
+
+.study-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 2px 12px;
+  margin-bottom: 10px;
+}
+
+.position {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.card-status {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+  min-height: 1.4em;
+}
+
+.card-stage {
+  position: relative;
+}
+
+.card {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 56vh;
+  height: clamp(280px, 54svh, 560px);
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  border-radius: var(--card-radius);
+  cursor: pointer;
+  perspective: 1600px;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  text-align: center;
+}
+
+.card:focus-visible {
+  outline-offset: 5px;
+}
+
+.card-inner {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.3, 0.7, 0.3, 1);
+}
+
+.card.is-flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.face-front {
+  transform: rotateY(0deg);
+}
+
+.face-back {
+  transform: rotateY(180deg);
+  background: var(--answer-bg);
+}
+
+.card:not(.is-flipped) .face-back,
+.card.is-flipped .face-front {
+  pointer-events: none;
+}
+
+.face-header {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 10px 20px;
+  background: var(--topic);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 1.25;
+}
+
+.face-label {
+  flex: none;
+  padding: 14px 24px 0;
+  font-size: 0.875rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.face-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 24px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.face-text {
+  display: block;
+  margin: auto 0;
+  font-size: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+  font-weight: 650;
+  line-height: 1.35;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+}
+
+.face-back .face-text {
+  font-weight: 600;
+}
+
+.face-hint {
+  flex: none;
+  padding: 0 24px 14px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Switch to the next card without showing the flip back. */
+.card.no-anim .card-inner,
+.card.no-anim .face {
+  transition: none !important;
+}
+
+.card-stage.enter-next .card {
+  animation: enter-next 0.28s ease-out;
+}
+
+.card-stage.enter-prev .card {
+  animation: enter-prev 0.28s ease-out;
+}
+
+@keyframes enter-next {
+  from {
+    opacity: 0;
+    transform: translateX(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes enter-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.topic-banner {
+  position: absolute;
+  z-index: 5;
+  bottom: 14px;
+  left: 50%;
+  width: max-content;
+  max-width: calc(100% - 32px);
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: var(--topic);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.25;
+  text-align: center;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+
+.topic-banner.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.mark-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.mark-row .btn {
+  min-height: 64px;
+  font-size: 1.25rem;
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+}
+
+.mark-row.is-hidden {
+  visibility: hidden;
+}
+
+.nav-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.btn-nav {
+  min-width: 120px;
+}
+
+.kbd-hint {
+  margin: 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted);
+  visibility: hidden;
+}
+
+kbd {
+  display: inline-block;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--surface);
+  font-family: inherit;
+  font-size: 0.8125rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .kbd-hint {
+    visibility: visible;
+  }
+}
+
+/* ---------- End of deck ---------- */
+
+#end-title,
+#resume-title {
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.25rem);
+  font-weight: 800;
+}
+
+.end-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat {
+  display: grid;
+  gap: 4px;
+  padding: 18px 12px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 6px solid var(--border);
+}
+
+.stat-known {
+  border-top-color: var(--known);
+}
+
+.stat-learning {
+  border-top-color: var(--learning);
+}
+
+.stat-num {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-label {
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.end-unmarked {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+/* ---------- Larger screens ---------- */
+
+@media (min-width: 700px) {
+  #app {
+    padding-top: 28px;
+  }
+
+  .face-header {
+    min-height: 60px;
+    padding: 12px 28px;
+    font-size: 1.1875rem;
+  }
+
+  .face-label,
+  .face-body,
+  .face-hint {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
+
+  .mark-row .btn {
+    font-size: 1.375rem;
+  }
+}
+
+/* Short screens, e.g. a phone held sideways */
+@media (max-height: 520px) {
+  .card {
+    height: max(240px, 62vh);
+  }
+
+  .screen-narrow {
+    padding-top: 2vh;
+  }
+}
+
+/* Narrow phones */
+@media (max-width: 400px) {
+  .mark-row .btn {
+    font-size: 1.125rem;
+  }
+
+  .btn-nav {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .nav-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .kbd-hint {
+    display: none;
+  }
+}
+
+/* ---------- Reduced motion: quicker flip, fewer other animations ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  /* The card still flips, but quickly and without the springy ease. */
+  .card-inner {
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .card-stage.enter-next .card,
+  .card-stage.enter-prev .card {
+    animation: fade-in 0.2s ease-out;
+  }
+
+  .btn,
+  .topic-btn,
+  .bar-fill,
+  .topic-banner {
+    transition: none;
+  }
+
+  .btn:active,
+  .topic-btn:active {
+    transform: none;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+</style>
+</head>
+<body>
+  <main id="app">
+
+    <!-- Home: list of topics -->
+    <section id="screen-home" class="screen" aria-labelledby="home-title">
+      <header class="home-header">
+        <h1 id="home-title" tabindex="-1">P3 Science Flashcards</h1>
+        <p class="lead" id="overall-progress">Pick a topic to start revising.</p>
+      </header>
+
+      <button type="button" id="study-all" class="btn btn-primary btn-block btn-study-all">
+        <span class="btn-study-all-title">Study all topics</span>
+        <span class="btn-study-all-meta" id="study-all-meta"></span>
+      </button>
+
+      <h2 class="section-title">Topics</h2>
+      <ol id="topic-list" class="topic-list"></ol>
+
+      <div class="reset-area">
+        <button type="button" id="reset-link" class="link-btn" aria-expanded="false" aria-controls="reset-confirm">Reset my progress</button>
+        <div id="reset-confirm" class="reset-confirm" hidden>
+          <p id="reset-question"><strong>Reset all progress?</strong> This clears every card you marked and where you left off. It cannot be undone.</p>
+          <div class="btn-row">
+            <button type="button" id="reset-yes" class="btn btn-danger" aria-describedby="reset-question">Yes, reset</button>
+            <button type="button" id="reset-no" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
+        <p id="reset-done" class="reset-done" role="status"></p>
+      </div>
+
+      <p id="storage-note" class="storage-note" hidden>Your progress can't be saved on this device right now, but you can still study.</p>
+    </section>
+
+    <!-- Continue where you left off -->
+    <section id="screen-resume" class="screen screen-narrow" aria-labelledby="resume-title" hidden>
+      <h2 id="resume-title" tabindex="-1">Welcome back!</h2>
+      <p id="resume-text" class="lead"></p>
+      <div class="btn-stack">
+        <button type="button" id="resume-continue" class="btn btn-primary btn-block">Continue where you left off</button>
+        <button type="button" id="resume-restart" class="btn btn-secondary btn-block">Start from the first card</button>
+        <button type="button" id="resume-back" class="btn btn-ghost btn-block">Back to topics</button>
+      </div>
+    </section>
+
+    <!-- Study -->
+    <section id="screen-study" class="screen screen-study" aria-labelledby="study-title" hidden>
+      <div class="study-top">
+        <button type="button" id="study-back" class="btn btn-ghost btn-back">
+          <span aria-hidden="true">←</span> Back to topics
+        </button>
+        <h2 id="study-title" class="study-mode"></h2>
+      </div>
+
+      <div class="study-meta">
+        <p id="position" class="position"></p>
+        <p id="card-status" class="card-status"></p>
+      </div>
+
+      <div class="card-stage" id="card-stage">
+        <div id="topic-banner" class="topic-banner" role="status" aria-live="polite"></div>
+        <button type="button" id="card" class="card">
+          <span class="card-inner">
+            <span class="face face-front" id="face-front">
+              <span class="face-header"><span class="face-topic"></span></span>
+              <span class="face-label">Question</span>
+              <span class="face-body"><span class="face-text"></span></span>
+              <span class="face-hint" aria-hidden="true">Tap to see the answer</span>
+            </span>
+            <span class="face face-back" id="face-back">
+              <span class="face-header"><span class="face-topic"></span></span>
+              <span class="face-label">Answer</span>
+              <span class="face-body"><span class="face-text"></span></span>
+              <span class="face-hint" aria-hidden="true">Tap to see the question</span>
+            </span>
+          </span>
+        </button>
+      </div>
+
+      <div class="mark-row" id="mark-row">
+        <button type="button" id="btn-known" class="btn btn-known" aria-label="I knew it" aria-keyshortcuts="1">I knew it <span aria-hidden="true">✓</span></button>
+        <button type="button" id="btn-learning" class="btn btn-learning" aria-label="Still learning" aria-keyshortcuts="2">Still learning <span aria-hidden="true">↻</span></button>
+      </div>
+
+      <div class="nav-row">
+        <button type="button" id="btn-prev" class="btn btn-secondary btn-nav" aria-label="Previous card" aria-keyshortcuts="ArrowLeft">
+          <span aria-hidden="true">←</span> <span class="btn-nav-text">Previous</span>
+        </button>
+        <p class="kbd-hint" aria-hidden="true">
+          <kbd>Space</kbd> flip · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>1</kbd> knew it · <kbd>2</kbd> still learning
+        </p>
+        <button type="button" id="btn-next" class="btn btn-secondary btn-nav" aria-label="Next card" aria-keyshortcuts="ArrowRight">
+          <span class="btn-nav-text">Next</span> <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- End of deck -->
+    <section id="screen-end" class="screen screen-narrow" aria-labelledby="end-title" hidden>
+      <h2 id="end-title" tabindex="-1">Well done!</h2>
+      <p id="end-text" class="lead"></p>
+      <div class="end-stats">
+        <div class="stat stat-known">
+          <span class="stat-num" id="end-known">0</span>
+          <span class="stat-label">I knew it <span aria-hidden="true">✓</span></span>
+        </div>
+        <div class="stat stat-learning">
+          <span class="stat-num" id="end-learning">0</span>
+          <span class="stat-label">Still learning <span aria-hidden="true">↻</span></span>
+        </div>
+      </div>
+      <p id="end-unmarked" class="end-unmarked" hidden></p>
+      <div class="btn-stack">
+        <button type="button" id="end-review" class="btn btn-learning btn-block">Review the ones I'm still learning</button>
+        <button type="button" id="end-next-topic" class="btn btn-primary btn-block"></button>
+        <button type="button" id="end-restart" class="btn btn-secondary btn-block">Start this topic again</button>
+        <button type="button" id="end-back" class="btn btn-ghost btn-block">Back to topics</button>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="sr-live" class="visually-hidden" aria-live="polite"></div>
+
+  <script>
+window.CARDS_INLINE = true;
+window.CARDS = [
+  {
+    "id": "01-01",
+    "topicOrder": 1,
+    "topic": "Chapter 1: Diversity of Living and Non-living Things",
+    "front": "What is meant by classification?",
+    "back": "Putting things into groups."
+  },
+  {
+    "id": "01-02",
+    "topicOrder": 1,
+    "topic": "Chapter 1: Diversity of Living and Non-living Things",
+    "front": "How are items classified?",
+    "back": "According to their common characteristics."
+  },
+  {
+    "id": "01-03",
+    "topicOrder": 1,
+    "topic": "Chapter 1: Diversity of Living and Non-living Things",
+    "front": "What are examples of characteristics?",
+    "back": "Shape, size, colour."
+  },
+  {
+    "id": "01-04",
+    "topicOrder": 1,
+    "topic": "Chapter 1: Diversity of Living and Non-living Things",
+    "front": "What are the four characteristics of living things?",
+    "back": "1. Need air, food and water\n2. Grow\n3. Respond to changes\n4. Reproduce"
+  },
+  {
+    "id": "01-05",
+    "topicOrder": 1,
+    "topic": "Chapter 1: Diversity of Living and Non-living Things",
+    "front": "Why do living things reproduce?",
+    "back": "To ensure that their own kind exist."
+  },
+  {
+    "id": "02-01",
+    "topicOrder": 2,
+    "topic": "Chapter 2: Classification of Plants",
+    "front": "Name the parts of a plant.",
+    "back": "Flower, fruit, leaf, stem, roots."
+  },
+  {
+    "id": "02-02",
+    "topicOrder": 2,
+    "topic": "Chapter 2: Classification of Plants",
+    "front": "What do plants need to live?",
+    "back": "Air, water, sunlight and nutrients."
+  },
+  {
+    "id": "02-03",
+    "topicOrder": 2,
+    "topic": "Chapter 2: Classification of Plants",
+    "front": "How do plants get their food?",
+    "back": "They make their own food through photosynthesis with their leaves."
+  },
+  {
+    "id": "02-04",
+    "topicOrder": 2,
+    "topic": "Chapter 2: Classification of Plants",
+    "front": "How do flowering plants reproduce?",
+    "back": "By seeds. Their fruits contain seeds."
+  },
+  {
+    "id": "02-05",
+    "topicOrder": 2,
+    "topic": "Chapter 2: Classification of Plants",
+    "front": "How do non-flowering plants reproduce? Give an example of a non-flowering plant.",
+    "back": "By spores. Examples: fern, moss."
+  },
+  {
+    "id": "03-01",
+    "topicOrder": 3,
+    "topic": "Chapter 2: Classification of Animals",
+    "front": "What are the six broad groups of animals?",
+    "back": "Mammals, birds, fish, reptiles, amphibians and insects."
+  },
+  {
+    "id": "03-02",
+    "topicOrder": 3,
+    "topic": "Chapter 2: Classification of Animals",
+    "front": "What is the outer covering of each animal group?",
+    "back": "Mammals: hair\nBirds: feathers\nFish: scales\nReptiles: scales\nAmphibians: moist skin\nInsects: hard body covering"
+  },
+  {
+    "id": "03-03",
+    "topicOrder": 3,
+    "topic": "Chapter 2: Classification of Animals",
+    "front": "Why are outer coverings important to animals?",
+    "back": "They keep animals warm, and protect them from harsh environments and predators."
+  },
+  {
+    "id": "03-04",
+    "topicOrder": 3,
+    "topic": "Chapter 2: Classification of Animals",
+    "front": "How can you tell that an animal is an insect?",
+    "back": "It has 3 body parts, 3 pairs of legs and 1 pair of feelers."
+  },
+  {
+    "id": "03-05",
+    "topicOrder": 3,
+    "topic": "Chapter 2: Classification of Animals",
+    "front": "Which animal group produces milk to feed its young?",
+    "back": "Mammals."
+  },
+  {
+    "id": "04-01",
+    "topicOrder": 4,
+    "topic": "Chapter 2: Fungi and Bacteria",
+    "front": "Give three examples of fungi.",
+    "back": "Mushroom, mould and yeast."
+  },
+  {
+    "id": "04-02",
+    "topicOrder": 4,
+    "topic": "Chapter 2: Fungi and Bacteria",
+    "front": "How do fungi get their food?",
+    "back": "They cannot make their own food. They feed on other living things, which can be dead or alive."
+  },
+  {
+    "id": "04-03",
+    "topicOrder": 4,
+    "topic": "Chapter 2: Fungi and Bacteria",
+    "front": "How do fungi reproduce?",
+    "back": "By spores."
+  },
+  {
+    "id": "04-04",
+    "topicOrder": 4,
+    "topic": "Chapter 2: Fungi and Bacteria",
+    "front": "What are bacteria?",
+    "back": "Very tiny living things that can only be seen under a microscope."
+  },
+  {
+    "id": "04-05",
+    "topicOrder": 4,
+    "topic": "Chapter 2: Fungi and Bacteria",
+    "front": "Are fungi and bacteria useful or harmful?",
+    "back": "Both.\nUseful: used to make bread, cheese and yoghurt.\nHarmful: they can make food go bad and cause diseases."
+  },
+  {
+    "id": "05-01",
+    "topicOrder": 5,
+    "topic": "Chapter 3: Types of Materials",
+    "front": "Name the 7 types of materials. (Hint: My Good Cat Will Read For People)",
+    "back": "Metal, Glass, Ceramic, Wood, Rubber, Fabric, Plastic."
+  },
+  {
+    "id": "05-02",
+    "topicOrder": 5,
+    "topic": "Chapter 3: Types of Materials",
+    "front": "Can an object be made of more than one material?",
+    "back": "Yes. An object can be made up of one or more materials."
+  },
+  {
+    "id": "06-01",
+    "topicOrder": 6,
+    "topic": "Chapter 3: Properties of Materials",
+    "front": "What are the 5 properties of materials?",
+    "back": "Strength, flexibility, waterproof, ability to float or sink in water, and transparency."
+  },
+  {
+    "id": "06-02",
+    "topicOrder": 6,
+    "topic": "Chapter 3: Properties of Materials",
+    "front": "What is strength?",
+    "back": "The ability to support a load without breaking or tearing."
+  },
+  {
+    "id": "06-03",
+    "topicOrder": 6,
+    "topic": "Chapter 3: Properties of Materials",
+    "front": "What is flexibility?",
+    "back": "The ability to bend without breaking."
+  },
+  {
+    "id": "06-04",
+    "topicOrder": 6,
+    "topic": "Chapter 3: Properties of Materials",
+    "front": "What does waterproof mean?",
+    "back": "The material does not absorb water."
+  },
+  {
+    "id": "06-05",
+    "topicOrder": 6,
+    "topic": "Chapter 3: Properties of Materials",
+    "front": "What is transparency?",
+    "back": "How much light can pass through a material."
+  },
+  {
+    "id": "07-01",
+    "topicOrder": 7,
+    "topic": "Chapter 4: Life Cycles of Plants",
+    "front": "What is a life cycle?",
+    "back": "The repeated pattern of change that a living thing goes through during its life."
+  },
+  {
+    "id": "07-02",
+    "topicOrder": 7,
+    "topic": "Chapter 4: Life Cycles of Plants",
+    "front": "What are the 3 stages in the life cycle of a plant?",
+    "back": "Seed → young plant → adult plant."
+  },
+  {
+    "id": "07-03",
+    "topicOrder": 7,
+    "topic": "Chapter 4: Life Cycles of Plants",
+    "front": "What do seeds need to germinate? (Hint: W.O.W)",
+    "back": "Water, Oxygen, Warmth."
+  },
+  {
+    "id": "07-04",
+    "topicOrder": 7,
+    "topic": "Chapter 4: Life Cycles of Plants",
+    "front": "During germination, which grows first: the root or the shoot?",
+    "back": "The root. It grows downwards to get water. Then the shoot grows upwards towards sunlight."
+  },
+  {
+    "id": "07-05",
+    "topicOrder": 7,
+    "topic": "Chapter 4: Life Cycles of Plants",
+    "front": "Where does a young plant get its food before its green leaves appear?",
+    "back": "From the seed leaves."
+  },
+  {
+    "id": "08-01",
+    "topicOrder": 8,
+    "topic": "Chapter 5: Life Cycles of Animals",
+    "front": "What are the stages of a 3-stage life cycle? Give an example.",
+    "back": "Egg → young → adult.\nExamples: chicken, frog, cockroach, grasshopper."
+  },
+  {
+    "id": "08-02",
+    "topicOrder": 8,
+    "topic": "Chapter 5: Life Cycles of Animals",
+    "front": "What are the stages of a 4-stage life cycle? Give an example.",
+    "back": "Egg → larva → pupa → adult.\nExamples: butterfly, mosquito, beetle."
+  },
+  {
+    "id": "08-03",
+    "topicOrder": 8,
+    "topic": "Chapter 5: Life Cycles of Animals",
+    "front": "What is the difference between the life cycle of a grasshopper and a mosquito?",
+    "back": "A grasshopper has a 3-stage life cycle: egg → young (nymph) → adult.\nA mosquito has a 4-stage life cycle: egg → larva → pupa → adult."
+  },
+  {
+    "id": "08-04",
+    "topicOrder": 8,
+    "topic": "Chapter 5: Life Cycles of Animals",
+    "front": "Does an insect eat during the pupa stage?",
+    "back": "No. It stops feeding and changes into an adult inside the pupal case."
+  },
+  {
+    "id": "09-01",
+    "topicOrder": 9,
+    "topic": "Chapter 6: Magnets",
+    "front": "What two kinds of force can a magnet exert?",
+    "back": "A push or a pull."
+  },
+  {
+    "id": "09-02",
+    "topicOrder": 9,
+    "topic": "Chapter 6: Magnets",
+    "front": "Where is the magnetic strength of a magnet the strongest?",
+    "back": "At the poles (North pole and South pole)."
+  },
+  {
+    "id": "09-03",
+    "topicOrder": 9,
+    "topic": "Chapter 6: Magnets",
+    "front": "What happens when like poles face each other? Unlike poles?",
+    "back": "Like poles repel.\nUnlike poles attract."
+  },
+  {
+    "id": "09-04",
+    "topicOrder": 9,
+    "topic": "Chapter 6: Magnets",
+    "front": "Does a magnet attract all metals?",
+    "back": "No. Magnets only attract magnetic materials, such as iron, steel, nickel and cobalt."
+  },
+  {
+    "id": "09-05",
+    "topicOrder": 9,
+    "topic": "Chapter 6: Magnets",
+    "front": "Which direction does a freely suspended magnet point when it comes to rest?",
+    "back": "North–South."
+  },
+  {
+    "id": "10-01",
+    "topicOrder": 10,
+    "topic": "Chapter 7: Making Magnets",
+    "front": "What are the two ways to make a magnet?",
+    "back": "The stroke method and the electrical method."
+  },
+  {
+    "id": "10-02",
+    "topicOrder": 10,
+    "topic": "Chapter 7: Making Magnets",
+    "front": "What can be made into a magnet?",
+    "back": "Only magnetic materials."
+  },
+  {
+    "id": "10-03",
+    "topicOrder": 10,
+    "topic": "Chapter 7: Making Magnets",
+    "front": "How do we make a magnet using the stroke method?",
+    "back": "Stroke a magnetic material (e.g. an iron nail) using a permanent magnet."
+  },
+  {
+    "id": "10-04",
+    "topicOrder": 10,
+    "topic": "Chapter 7: Making Magnets",
+    "front": "What are magnets made by the electrical method called?",
+    "back": "Electromagnets."
+  },
+  {
+    "id": "10-05",
+    "topicOrder": 10,
+    "topic": "Chapter 7: Making Magnets",
+    "front": "How can we make an electromagnet stronger?",
+    "back": "Increase the number of turns of wire, or increase the number of batteries."
+  }
+];
+</script>
+  <script>
+/* P3 Science Flashcards
+ *
+ * Card data comes from cards.json (when served over http) or from cards.js,
+ * which sets window.CARDS (used when index.html is opened straight from disk).
+ * Cards are always shown in topic order, then in the order they are listed.
+ */
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'p3-science-flashcards:v1';
+
+  // One colour per topic, in topic order. All pass WCAG AA with white text.
+  var TOPIC_COLOURS = [
+    '#1565C0', // blue
+    '#2E7D32', // green
+    '#A84B00', // burnt orange
+    '#6A1B9A', // purple
+    '#C62828', // red
+    '#00796B', // teal
+    '#5B6400', // olive
+    '#AD1457', // magenta
+    '#3F51B5', // indigo
+    '#455A64'  // slate
+  ];
+
+  var SWIPE_MIN_DISTANCE = 50;
+  var BANNER_MS = 2200;
+
+  // ---------- State ----------
+
+  var cards = [];   // every card, in study order
+  var topics = [];  // { order, name, colour, cardIndexes }
+  var store = { status: {}, lastPos: {} }; // status: id -> 'known' | 'learning'
+  var storageOk = true;
+
+  // The deck being studied.
+  // scope: 'all' or a topic order number; review: only cards not marked known.
+  var session = null;
+
+  var currentScreen = 'home';
+  var bannerTimer = null;
+  var suppressClick = false;
+
+  // ---------- Elements ----------
+
+  function $(id) { return document.getElementById(id); }
+
+  var el = {
+    screens: {
+      home: $('screen-home'),
+      resume: $('screen-resume'),
+      study: $('screen-study'),
+      end: $('screen-end')
+    },
+    homeTitle: $('home-title'),
+    overallProgress: $('overall-progress'),
+    studyAll: $('study-all'),
+    studyAllMeta: $('study-all-meta'),
+    topicList: $('topic-list'),
+    resetLink: $('reset-link'),
+    resetConfirm: $('reset-confirm'),
+    resetYes: $('reset-yes'),
+    resetNo: $('reset-no'),
+    resetDone: $('reset-done'),
+    storageNote: $('storage-note'),
+
+    resumeTitle: $('resume-title'),
+    resumeText: $('resume-text'),
+    resumeContinue: $('resume-continue'),
+    resumeRestart: $('resume-restart'),
+    resumeBack: $('resume-back'),
+
+    studyBack: $('study-back'),
+    studyTitle: $('study-title'),
+    position: $('position'),
+    cardStatus: $('card-status'),
+    cardStage: $('card-stage'),
+    banner: $('topic-banner'),
+    card: $('card'),
+    faceFront: $('face-front'),
+    faceBack: $('face-back'),
+    markRow: $('mark-row'),
+    btnKnown: $('btn-known'),
+    btnLearning: $('btn-learning'),
+    btnPrev: $('btn-prev'),
+    btnNext: $('btn-next'),
+
+    endTitle: $('end-title'),
+    endText: $('end-text'),
+    endKnown: $('end-known'),
+    endLearning: $('end-learning'),
+    endUnmarked: $('end-unmarked'),
+    endReview: $('end-review'),
+    endNextTopic: $('end-next-topic'),
+    endRestart: $('end-restart'),
+    endBack: $('end-back'),
+
+    srLive: $('sr-live')
+  };
+
+  // ---------- Storage (every access wrapped so blocked storage is fine) ----------
+
+  function loadStore() {
+    var raw = null;
+    try {
+      raw = window.localStorage.getItem(STORAGE_KEY);
+    } catch (e) {
+      storageOk = false;
+      return;
+    }
+    if (!raw) return;
+    try {
+      var parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === 'object') {
+        if (parsed.status && typeof parsed.status === 'object') store.status = parsed.status;
+        if (parsed.lastPos && typeof parsed.lastPos === 'object') store.lastPos = parsed.lastPos;
+      }
+    } catch (e) {
+      // Corrupt data: start fresh.
+    }
+  }
+
+  function saveStore() {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+      storageOk = true;
+    } catch (e) {
+      storageOk = false;
+    }
+    el.storageNote.hidden = storageOk;
+  }
+
+  function clearStore() {
+    store = { status: {}, lastPos: {} };
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {
+      storageOk = false;
+    }
+  }
+
+  // ---------- Card data ----------
+
+  function loadCardData() {
+    var fallback = function () {
+      return Array.isArray(window.CARDS) ? window.CARDS : [];
+    };
+    // fetch() of a local file fails on file://, so go straight to cards.js.
+    // The single-file version has its cards built in, so it never fetches.
+    if (window.location.protocol === 'file:' || typeof window.fetch !== 'function' ||
+        window.CARDS_INLINE) {
+      return Promise.resolve(fallback());
+    }
+    return window.fetch('cards.json', { cache: 'no-cache' })
+      .then(function (res) {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        return res.json();
+      })
+      .then(function (data) {
+        return Array.isArray(data) && data.length ? data : fallback();
+      })
+      .catch(fallback);
+  }
+
+  function prepareCards(data) {
+    var valid = data.filter(function (c) {
+      return c && typeof c.id === 'string' && typeof c.front === 'string' &&
+        typeof c.back === 'string' && typeof c.topic === 'string' &&
+        isFinite(Number(c.topicOrder));
+    }).map(function (c, i) {
+      return {
+        id: c.id,
+        topicOrder: Number(c.topicOrder),
+        topic: c.topic,
+        front: c.front,
+        back: c.back,
+        listIndex: i
+      };
+    });
+
+    // Topic order first, then the order cards are listed in the file.
+    valid.sort(function (a, b) {
+      return a.topicOrder - b.topicOrder || a.listIndex - b.listIndex;
+    });
+
+    cards = valid;
+    topics = [];
+    var byOrder = {};
+    cards.forEach(function (card, index) {
+      var topic = byOrder[card.topicOrder];
+      if (!topic) {
+        topic = {
+          order: card.topicOrder,
+          name: card.topic,
+          colour: TOPIC_COLOURS[topics.length % TOPIC_COLOURS.length],
+          cardIndexes: []
+        };
+        byOrder[card.topicOrder] = topic;
+        topics.push(topic);
+      }
+      card.topicIndex = topics.indexOf(topic);
+      card.posInTopic = topic.cardIndexes.length + 1;
+      card.overallPos = index + 1;
+      topic.cardIndexes.push(index);
+    });
+  }
+
+  function topicOf(card) { return topics[card.topicIndex]; }
+
+  function topicByOrder(order) {
+    for (var i = 0; i < topics.length; i++) {
+      if (topics[i].order === order) return topics[i];
+    }
+    return null;
+  }
+
+  function scopeKey(scope) { return scope === 'all' ? 'all' : 'topic-' + scope; }
+
+  function scopeIndexes(scope) {
+    if (scope === 'all') return cards.map(function (_, i) { return i; });
+    var topic = topicByOrder(scope);
+    return topic ? topic.cardIndexes.slice() : [];
+  }
+
+  function scopeName(scope) {
+    if (scope === 'all') return 'All topics';
+    var topic = topicByOrder(scope);
+    return topic ? topic.name : '';
+  }
+
+  function isKnown(index) { return store.status[cards[index].id] === 'known'; }
+
+  function countKnown(indexes) {
+    return indexes.filter(isKnown).length;
+  }
+
+  // ---------- Screens ----------
+
+  function showScreen(name, focusTarget) {
+    Object.keys(el.screens).forEach(function (key) {
+      el.screens[key].hidden = key !== name;
+    });
+    currentScreen = name;
+    window.scrollTo(0, 0);
+    if (focusTarget) {
+      try {
+        focusTarget.focus({ preventScroll: true });
+      } catch (e) {
+        focusTarget.focus();
+      }
+    }
+  }
+
+  function announce(text) {
+    el.srLive.textContent = '';
+    window.setTimeout(function () { el.srLive.textContent = text; }, 50);
+  }
+
+  // ---------- Home ----------
+
+  function renderHome() {
+    var total = cards.length;
+    var known = countKnown(scopeIndexes('all'));
+    el.overallProgress.textContent = known > 0
+      ? 'You know ' + known + ' of ' + total + ' cards. Keep going!'
+      : 'Pick a topic to start revising.';
+    el.studyAllMeta.textContent = total + ' cards · ' + known + ' known';
+
+    el.topicList.textContent = '';
+    topics.forEach(function (topic) {
+      var count = topic.cardIndexes.length;
+      var knownInTopic = countKnown(topic.cardIndexes);
+      var li = document.createElement('li');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'topic-btn';
+      btn.style.setProperty('--topic', topic.colour);
+      btn.setAttribute('data-topic', String(topic.order));
+
+      var num = document.createElement('span');
+      num.className = 'topic-num';
+      num.setAttribute('aria-hidden', 'true');
+      num.textContent = String(topic.order);
+
+      var main = document.createElement('span');
+      main.className = 'topic-main';
+
+      var name = document.createElement('span');
+      name.className = 'topic-name';
+      name.textContent = topic.name;
+
+      var meta = document.createElement('span');
+      meta.className = 'topic-meta';
+      var countEl = document.createElement('span');
+      countEl.textContent = count + (count === 1 ? ' card' : ' cards');
+      var knownEl = document.createElement('span');
+      knownEl.textContent = knownInTopic + ' of ' + count + ' known';
+      meta.appendChild(countEl);
+      meta.appendChild(knownEl);
+
+      var resumeIndex = savedPosition(topic.order);
+      if (resumeIndex > 0) {
+        var resumeEl = document.createElement('span');
+        resumeEl.className = 'topic-resume';
+        resumeEl.textContent = 'Stopped at card ' + (resumeIndex + 1);
+        meta.appendChild(resumeEl);
+      }
+
+      var bar = document.createElement('span');
+      bar.className = 'bar';
+      bar.setAttribute('aria-hidden', 'true');
+      var fill = document.createElement('span');
+      fill.className = 'bar-fill';
+      fill.style.width = (count ? Math.round((knownInTopic / count) * 100) : 0) + '%';
+      bar.appendChild(fill);
+
+      var chevron = document.createElement('span');
+      chevron.className = 'topic-chevron';
+      chevron.setAttribute('aria-hidden', 'true');
+      chevron.textContent = '›';
+
+      main.appendChild(name);
+      main.appendChild(bar);
+      main.appendChild(meta);
+      btn.appendChild(num);
+      btn.appendChild(main);
+      btn.appendChild(chevron);
+      li.appendChild(btn);
+      el.topicList.appendChild(li);
+    });
+
+    el.storageNote.hidden = storageOk;
+  }
+
+  function goHome() {
+    hideResetConfirm();
+    el.resetDone.textContent = '';
+    session = null;
+    renderHome();
+    showScreen('home', el.homeTitle);
+  }
+
+  function hideResetConfirm() {
+    el.resetConfirm.hidden = true;
+    el.resetLink.setAttribute('aria-expanded', 'false');
+  }
+
+  // ---------- Starting a deck ----------
+
+  // Index (within the scope's deck) of the card the student was last on, or -1.
+  function savedPosition(scope) {
+    var id = store.lastPos[scopeKey(scope)];
+    if (!id) return -1;
+    var indexes = scopeIndexes(scope);
+    for (var i = 0; i < indexes.length; i++) {
+      if (cards[indexes[i]].id === id) return i;
+    }
+    return -1;
+  }
+
+  function openScope(scope) {
+    var resumeAt = savedPosition(scope);
+    if (resumeAt > 0) {
+      var total = scopeIndexes(scope).length;
+      el.resumeText.textContent = 'Last time you stopped at card ' + (resumeAt + 1) + ' of ' +
+        total + ' in ' + (scope === 'all' ? 'All topics' : '"' + scopeName(scope) + '"') + '.';
+      el.resumeContinue.onclick = function () { startDeck(scope, false, resumeAt); };
+      el.resumeRestart.onclick = function () { startDeck(scope, false, 0); };
+      showScreen('resume', el.resumeTitle);
+    } else {
+      startDeck(scope, false, 0);
+    }
+  }
+
+  function startDeck(scope, review, startAt) {
+    var deck = scopeIndexes(scope);
+    if (review) deck = deck.filter(function (i) { return !isKnown(i); });
+    if (!deck.length) {
+      goHome();
+      return;
+    }
+    session = {
+      scope: scope,
+      review: review,
+      deck: deck,
+      pos: Math.min(Math.max(startAt || 0, 0), deck.length - 1),
+      flipped: false,
+      revealed: false
+    };
+    el.studyTitle.textContent = (review ? 'Review: ' : '') +
+      (scope === 'all' ? 'All topics' : 'Topic ' + scope);
+    hideBanner();
+    showScreen('study', el.card);
+    renderCard(null);
+  }
+
+  // ---------- Study ----------
+
+  function currentCard() { return cards[session.deck[session.pos]]; }
+
+  function setFace(face, topic, text) {
+    face.querySelector('.face-topic').textContent = topic.name;
+    face.querySelector('.face-text').textContent = text;
+  }
+
+  function renderCard(direction) {
+    var card = currentCard();
+    var topic = topicOf(card);
+    var prevCard = direction === 'next' && session.pos > 0
+      ? cards[session.deck[session.pos - 1]]
+      : null;
+
+    session.flipped = false;
+    session.revealed = false;
+
+    // Jump back to the question side without animating the turn.
+    el.card.classList.add('no-anim');
+    el.card.classList.remove('is-flipped');
+    el.card.style.setProperty('--topic', topic.colour);
+    setFace(el.faceFront, topic, card.front);
+    setFace(el.faceBack, topic, card.back);
+    void el.card.offsetWidth;
+    el.card.classList.remove('no-anim');
+
+    var position = 'Card ' + card.posInTopic + ' of ' + topic.cardIndexes.length +
+      ' in this topic · ' + card.overallPos + ' of ' + cards.length + ' overall';
+    if (session.review) {
+      position += ' · Review ' + (session.pos + 1) + ' of ' + session.deck.length;
+    }
+    el.position.textContent = position;
+
+    var isLast = session.pos === session.deck.length - 1;
+    el.btnPrev.disabled = session.pos === 0;
+    el.btnNext.querySelector('.btn-nav-text').textContent = isLast ? 'Finish' : 'Next';
+    el.btnNext.setAttribute('aria-label', isLast ? 'Finish this deck' : 'Next card');
+
+    if (!session.review) {
+      store.lastPos[scopeKey(session.scope)] = card.id;
+      saveStore();
+    }
+
+    updateCardState();
+    fitAllText();
+
+    if (direction) {
+      el.cardStage.classList.remove('enter-next', 'enter-prev');
+      void el.cardStage.offsetWidth;
+      el.cardStage.classList.add(direction === 'next' ? 'enter-next' : 'enter-prev');
+    }
+
+    if (prevCard && prevCard.topicIndex !== card.topicIndex) {
+      showBanner(topic);
+    } else if (direction === 'prev') {
+      hideBanner();
+    }
+  }
+
+  function updateCardState() {
+    var card = currentCard();
+    var topic = topicOf(card);
+    var flipped = session.flipped;
+
+    el.card.classList.toggle('is-flipped', flipped);
+    el.faceFront.setAttribute('aria-hidden', flipped ? 'true' : 'false');
+    el.faceBack.setAttribute('aria-hidden', flipped ? 'false' : 'true');
+    el.card.setAttribute('aria-label', flipped
+      ? 'Showing the answer. ' + topic.name + '. Answer: ' + card.back.replace(/\n/g, '. ') +
+        '. Press to see the question again.'
+      : 'Showing the question. ' + topic.name + '. Question: ' + card.front +
+        ' Press to see the answer.');
+
+    el.markRow.classList.toggle('is-hidden', !session.revealed);
+    el.markRow.setAttribute('aria-hidden', session.revealed ? 'false' : 'true');
+
+    var status = store.status[card.id];
+    el.cardStatus.textContent = status === 'known'
+      ? 'You marked this: I knew it ✓'
+      : status === 'learning' ? 'You marked this: Still learning ↻' : '';
+  }
+
+  function flip() {
+    if (!session) return;
+    session.flipped = !session.flipped;
+    if (session.flipped) session.revealed = true;
+    updateCardState();
+    var card = currentCard();
+    announce(session.flipped ? 'Answer: ' + card.back : 'Question: ' + card.front);
+  }
+
+  function mark(status) {
+    if (!session || !session.revealed) return;
+    store.status[currentCard().id] = status;
+    saveStore();
+    // The mark buttons hide on the next card, so keep focus on the card.
+    if (document.activeElement === el.btnKnown || document.activeElement === el.btnLearning) {
+      el.card.focus();
+    }
+    goNext();
+  }
+
+  function goNext() {
+    if (!session) return;
+    if (session.pos < session.deck.length - 1) {
+      session.pos += 1;
+      renderCard('next');
+    } else {
+      finishDeck();
+    }
+  }
+
+  function goPrev() {
+    if (!session || session.pos === 0) return;
+    session.pos -= 1;
+    renderCard('prev');
+  }
+
+  function showBanner(topic) {
+    window.clearTimeout(bannerTimer);
+    el.banner.style.setProperty('--topic', topic.colour);
+    el.banner.textContent = 'Next topic: ' + topic.name;
+    el.banner.classList.add('is-visible');
+    bannerTimer = window.setTimeout(hideBanner, BANNER_MS);
+  }
+
+  function hideBanner() {
+    window.clearTimeout(bannerTimer);
+    el.banner.classList.remove('is-visible');
+  }
+
+  // Shrink long text a little to fit; if it still doesn't fit, the card scrolls.
+  function fitText(face) {
+    var body = face.querySelector('.face-body');
+    var text = face.querySelector('.face-text');
+    text.style.fontSize = '';
+    if (!body.clientHeight) return;
+    var base = parseFloat(window.getComputedStyle(text).fontSize);
+    var min = Math.max(22, Math.floor(base * 0.8));
+    var size = base;
+    while (body.scrollHeight > body.clientHeight + 1 && size > min) {
+      size -= 1;
+      text.style.fontSize = size + 'px';
+    }
+    body.scrollTop = 0;
+  }
+
+  function fitAllText() {
+    fitText(el.faceFront);
+    fitText(el.faceBack);
+  }
+
+  // ---------- End of deck ----------
+
+  function finishDeck() {
+    var s = session;
+    hideBanner();
+    if (!s.review) {
+      delete store.lastPos[scopeKey(s.scope)];
+      saveStore();
+    }
+
+    var known = 0;
+    var learning = 0;
+    s.deck.forEach(function (i) {
+      var st = store.status[cards[i].id];
+      if (st === 'known') known += 1;
+      else if (st === 'learning') learning += 1;
+    });
+    var unmarked = s.deck.length - known - learning;
+
+    el.endTitle.textContent = learning === 0 && unmarked === 0 ? 'Brilliant, all done!' : 'Well done!';
+    el.endText.textContent = (s.review ? 'You finished reviewing ' : 'You finished ') +
+      (s.scope === 'all' ? 'all topics' : '"' + scopeName(s.scope) + '"') + '.';
+    el.endKnown.textContent = String(known);
+    el.endLearning.textContent = String(learning);
+    el.endUnmarked.hidden = unmarked === 0;
+    el.endUnmarked.textContent = unmarked === 1
+      ? '1 card was not marked yet.'
+      : unmarked + ' cards were not marked yet.';
+
+    // Review covers the whole topic (or all topics), skipping known cards.
+    var toReview = scopeIndexes(s.scope).filter(function (i) { return !isKnown(i); }).length;
+    el.endReview.hidden = toReview === 0;
+    el.endReview.textContent = "Review the ones I'm still learning (" + toReview + ')';
+    el.endReview.onclick = function () { startDeck(s.scope, true, 0); };
+
+    var nextTopic = null;
+    if (s.scope !== 'all') {
+      var idx = topics.indexOf(topicByOrder(s.scope));
+      nextTopic = idx >= 0 && idx < topics.length - 1 ? topics[idx + 1] : null;
+    }
+    el.endNextTopic.hidden = !nextTopic;
+    if (nextTopic) {
+      el.endNextTopic.textContent = 'Go to next topic: ' + nextTopic.name;
+      el.endNextTopic.onclick = function () { openScope(nextTopic.order); };
+    }
+
+    el.endRestart.textContent = s.scope === 'all' ? 'Start all topics again' : 'Start this topic again';
+    el.endRestart.onclick = function () {
+      delete store.lastPos[scopeKey(s.scope)];
+      saveStore();
+      startDeck(s.scope, false, 0);
+    };
+
+    session = null;
+    showScreen('end', el.endTitle);
+  }
+
+  // ---------- Events ----------
+
+  function bindEvents() {
+    el.studyAll.addEventListener('click', function () { openScope('all'); });
+
+    el.topicList.addEventListener('click', function (e) {
+      var btn = e.target.closest('.topic-btn');
+      if (btn) openScope(Number(btn.getAttribute('data-topic')));
+    });
+
+    el.resetLink.addEventListener('click', function () {
+      var opening = el.resetConfirm.hidden;
+      el.resetConfirm.hidden = !opening;
+      el.resetLink.setAttribute('aria-expanded', opening ? 'true' : 'false');
+      el.resetDone.textContent = '';
+      if (opening) el.resetNo.focus();
+    });
+    el.resetNo.addEventListener('click', function () {
+      hideResetConfirm();
+      el.resetLink.focus();
+    });
+    el.resetYes.addEventListener('click', function () {
+      clearStore();
+      hideResetConfirm();
+      renderHome();
+      el.resetDone.textContent = 'Your progress has been reset.';
+      el.resetLink.focus();
+    });
+
+    el.resumeBack.addEventListener('click', goHome);
+    el.studyBack.addEventListener('click', goHome);
+    el.endBack.addEventListener('click', goHome);
+
+    el.card.addEventListener('click', function () {
+      if (suppressClick) return;
+      flip();
+    });
+    el.btnKnown.addEventListener('click', function () { mark('known'); });
+    el.btnLearning.addEventListener('click', function () { mark('learning'); });
+    el.btnPrev.addEventListener('click', goPrev);
+    el.btnNext.addEventListener('click', goNext);
+
+    // Swipe left/right on the card to move between cards.
+    var touchStart = null;
+    el.card.addEventListener('touchstart', function (e) {
+      if (e.touches.length !== 1) {
+        touchStart = null;
+        return;
+      }
+      touchStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }, { passive: true });
+    el.card.addEventListener('touchend', function (e) {
+      if (!touchStart || !e.changedTouches.length) return;
+      var dx = e.changedTouches[0].clientX - touchStart.x;
+      var dy = e.changedTouches[0].clientY - touchStart.y;
+      touchStart = null;
+      if (Math.abs(dx) >= SWIPE_MIN_DISTANCE && Math.abs(dx) > Math.abs(dy) * 1.5) {
+        suppressClick = true;
+        window.setTimeout(function () { suppressClick = false; }, 400);
+        if (dx < 0) goNext();
+        else goPrev();
+      }
+    }, { passive: true });
+    el.card.addEventListener('touchcancel', function () { touchStart = null; }, { passive: true });
+
+    document.addEventListener('keydown', function (e) {
+      if (currentScreen !== 'study' || !session) return;
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      var target = e.target;
+      var onOtherControl = target && target !== el.card &&
+        /^(BUTTON|A|INPUT|SELECT|TEXTAREA)$/.test(target.tagName);
+
+      switch (e.key) {
+        case ' ':
+        case 'Spacebar':
+          // On the card (or any button) Space already "clicks" it natively.
+          if (target === el.card || onOtherControl) return;
+          e.preventDefault();
+          flip();
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          goNext();
+          break;
+        case 'ArrowLeft':
+          e.preventDefault();
+          goPrev();
+          break;
+        case '1':
+          if (session.revealed) {
+            e.preventDefault();
+            mark('known');
+          }
+          break;
+        case '2':
+          if (session.revealed) {
+            e.preventDefault();
+            mark('learning');
+          }
+          break;
+        default:
+          break;
+      }
+    });
+
+    var resizeTimer = null;
+    window.addEventListener('resize', function () {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(function () {
+        if (currentScreen === 'study' && session) fitAllText();
+      }, 120);
+    });
+  }
+
+  // ---------- Start ----------
+
+  function init() {
+    loadStore();
+    bindEvents();
+    loadCardData().then(function (data) {
+      prepareCards(data);
+      if (!cards.length) {
+        el.overallProgress.textContent =
+          'No flashcards found. Check that cards.json and cards.js are in the same folder as index.html.';
+        el.studyAll.disabled = true;
+        return;
+      }
+      renderHome();
+    });
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

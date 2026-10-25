@@ -8,6 +8,10 @@ offline on phones, tablets and laptops. There is nothing to install.
 **Easiest way:** double-click `index.html`. It opens in your web browser and
 works straight away, even without internet.
 
+**As a single file:** `p3-science-flashcards.html` has everything (styles,
+cards and app) inside one file. Email it, upload it to a learning platform or
+copy it to a USB stick, and students just open it in a browser.
+
 **From a local web server** (optional, e.g. to share on a school network):
 
 ```sh
@@ -25,7 +29,8 @@ Keep these files together in the same folder:
 | `app.js`        | How the app works.                                          |
 | `cards.json`    | **The flashcards.** Teachers edit this file.                |
 | `cards.js`      | A copy of the flashcards, made from `cards.json` (see below). |
-| `build-cards.js`| A small script that makes `cards.js` from `cards.json`.     |
+| `build-cards.js`| A small script that makes `cards.js` and the single-file version from `cards.json`. |
+| `p3-science-flashcards.html` | The whole app in one file, made by `build-cards.js`. |
 
 Each student's progress (cards marked "I knew it" or "Still learning", and
 where they stopped in each topic) is saved in their own browser on their own
@@ -70,7 +75,8 @@ folder (you need [Node.js](https://nodejs.org/) installed):
 node build-cards.js
 ```
 
-It checks your cards for common mistakes (a missing field, a repeated id, a
+This also rebuilds the single-file `p3-science-flashcards.html` with your
+new cards. It checks your cards for common mistakes (a missing field, a repeated id, a
 topic name that doesn't match) and lists how many cards each topic has. If it
 reports an error, fix `cards.json` and run it again.
 

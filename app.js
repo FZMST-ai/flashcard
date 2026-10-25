@@ -146,7 +146,9 @@
       return Array.isArray(window.CARDS) ? window.CARDS : [];
     };
     // fetch() of a local file fails on file://, so go straight to cards.js.
-    if (window.location.protocol === 'file:' || typeof window.fetch !== 'function') {
+    // The single-file version has its cards built in, so it never fetches.
+    if (window.location.protocol === 'file:' || typeof window.fetch !== 'function' ||
+        window.CARDS_INLINE) {
       return Promise.resolve(fallback());
     }
     return window.fetch('cards.json', { cache: 'no-cache' })

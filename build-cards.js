@@ -11,6 +11,7 @@ const path = require('path');
 
 const srcPath = path.join(__dirname, 'cards.json');
 const outPath = path.join(__dirname, 'cards.js');
+const standalonePath = 'p3-science-flashcards.html';
 
 function fail(message) {
   console.error('Error: ' + message);
@@ -58,7 +59,18 @@ const output =
 
 fs.writeFileSync(outPath, output, 'utf8');
 
-console.log('Wrote cards.js with ' + cards.length + ' cards:');
+// Also build one self-contained HTML file (styles, cards and app all inside),
+// which is easy to email, upload or share as a single file.
+const read = (name) => fs.readFileSync(path.join(__dirname, name), 'utf8');
+const cardsJson = JSON.stringify(cards, null, 2).replace(/<\//g, '<\\/');
+const standalone = read('index.html')
+  .replace('<link rel="stylesheet" href="styles.css">', () => '<style>\n' + read('styles.css') + '</style>')
+  .replace('<script src="cards.js"></script>', () =>
+    '<script>\nwindow.CARDS_INLINE = true;\nwindow.CARDS = ' + cardsJson + ';\n</script>')
+  .replace('<script src="app.js"></script>', () => '<script>\n' + read('app.js') + '</script>');
+fs.writeFileSync(path.join(__dirname, standalonePath), standalone, 'utf8');
+
+console.log('Wrote cards.js and ' + standalonePath + ' with ' + cards.length + ' cards:');
 [...topicNames.keys()].sort((a, b) => a - b).forEach((order) => {
   const count = cards.filter((c) => c.topicOrder === order).length;
   console.log('  Topic ' + order + ': ' + topicNames.get(order) + ' (' + count + ')');
