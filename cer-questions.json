@@ -1,0 +1,122 @@
+[
+  {
+    "id": "cer-01",
+    "topicOrder": 1,
+    "situation": "Ali's toy robot can walk and make sounds. He watched it closely for a month.",
+    "question": "Is the toy robot a living thing?",
+    "statements": [
+      { "text": "The robot did not grow bigger during the month.", "part": "E" },
+      { "text": "Living things grow and reproduce. The robot does neither, so it is a non-living thing.", "part": "R" },
+      { "text": "The toy robot is not a living thing.", "part": "C" },
+      { "text": "The robot cannot make more robots on its own.", "part": "E" }
+    ]
+  },
+  {
+    "id": "cer-02",
+    "topicOrder": 2,
+    "situation": "Mei put two similar plants in pots. Plant A was placed near a sunny window. Plant B was kept in a dark cupboard. Both were watered every day for one week.",
+    "question": "Do plants need sunlight to stay healthy?",
+    "statements": [
+      { "text": "Plants use sunlight to make their own food through photosynthesis. Without sunlight, Plant B could not make food.", "part": "R" },
+      { "text": "Plant B turned yellow and drooped.", "part": "E" },
+      { "text": "Plants need sunlight to stay healthy.", "part": "C" },
+      { "text": "Plant A stayed green and grew taller.", "part": "E" }
+    ]
+  },
+  {
+    "id": "cer-03",
+    "topicOrder": 3,
+    "situation": "Lily saw an animal in the park. It had a beak, two legs and its body was covered in feathers.",
+    "question": "Which animal group does this animal belong to?",
+    "statements": [
+      { "text": "Its body was covered in feathers.", "part": "E" },
+      { "text": "The animal is a bird.", "part": "C" },
+      { "text": "Feathers are the outer covering of birds. No other animal group has feathers.", "part": "R" }
+    ]
+  },
+  {
+    "id": "cer-04",
+    "topicOrder": 4,
+    "situation": "Ravi left one slice of bread in a warm, damp cupboard and another slice in the fridge for 5 days.",
+    "question": "Does mould grow better on bread kept in a warm place?",
+    "statements": [
+      { "text": "The bread in the fridge had no mould.", "part": "E" },
+      { "text": "Mould grows better on bread kept in a warm place.", "part": "C" },
+      { "text": "Mould is a fungus. It feeds on the bread and grows faster where it is warm and damp.", "part": "R" },
+      { "text": "The bread in the warm cupboard had many patches of mould.", "part": "E" }
+    ]
+  },
+  {
+    "id": "cer-05",
+    "topicOrder": 5,
+    "situation": "Siti looked closely at her mug. The body of the mug is shiny and hard. The handle is light and smooth.",
+    "question": "Is the mug made of more than one material?",
+    "statements": [
+      { "text": "The handle of the mug is made of plastic.", "part": "E" },
+      { "text": "An object can be made of one or more materials. The mug uses two different materials.", "part": "R" },
+      { "text": "The body of the mug is made of metal.", "part": "E" },
+      { "text": "The mug is made of more than one material.", "part": "C" }
+    ]
+  },
+  {
+    "id": "cer-06",
+    "topicOrder": 6,
+    "situation": "Jun dropped 5 drops of water onto a piece of cloth, a piece of paper and a plastic sheet.",
+    "question": "Which material is best for making an umbrella?",
+    "statements": [
+      { "text": "The cloth and the paper soaked up the water.", "part": "E" },
+      { "text": "Plastic is the best material for making an umbrella.", "part": "C" },
+      { "text": "The water stayed on top of the plastic sheet.", "part": "E" },
+      { "text": "Plastic is waterproof because it does not absorb water, so it keeps us dry.", "part": "R" }
+    ]
+  },
+  {
+    "id": "cer-07",
+    "topicOrder": 7,
+    "situation": "Hana placed 10 green bean seeds on wet cotton wool and 10 green bean seeds on dry cotton wool. Both dishes were kept in the same warm place.",
+    "question": "Do seeds need water to germinate?",
+    "statements": [
+      { "text": "Seeds need water, oxygen and warmth to germinate. The seeds on dry cotton wool had no water.", "part": "R" },
+      { "text": "The seeds on dry cotton wool did not germinate.", "part": "E" },
+      { "text": "Seeds need water to germinate.", "part": "C" },
+      { "text": "The seeds on wet cotton wool germinated after 3 days.", "part": "E" }
+    ]
+  },
+  {
+    "id": "cer-08",
+    "topicOrder": 8,
+    "situation": "Daniel watched mosquitoes in a container of water for two weeks.",
+    "question": "How many stages are there in the life cycle of a mosquito?",
+    "statements": [
+      { "text": "The larvae changed into pupae.", "part": "E" },
+      { "text": "Animals that go through the egg, larva, pupa and adult stages have a 4-stage life cycle.", "part": "R" },
+      { "text": "Eggs on the water hatched into larvae.", "part": "E" },
+      { "text": "The mosquito has a 4-stage life cycle.", "part": "C" },
+      { "text": "Adult mosquitoes came out of the pupae.", "part": "E" }
+    ]
+  },
+  {
+    "id": "cer-09",
+    "topicOrder": 9,
+    "situation": "Aisha brought a magnet near an iron nail and a copper coin.",
+    "question": "Does a magnet attract all metals?",
+    "statements": [
+      { "text": "The magnet did not attract the copper coin, even though copper is a metal.", "part": "E" },
+      { "text": "Magnets only attract magnetic materials such as iron, steel, nickel and cobalt. Copper is not a magnetic material.", "part": "R" },
+      { "text": "The magnet attracted the iron nail.", "part": "E" },
+      { "text": "A magnet does not attract all metals.", "part": "C" }
+    ]
+  },
+  {
+    "id": "cer-10",
+    "topicOrder": 10,
+    "situation": "Ken made an electromagnet with an iron nail, a battery and wire. He counted how many paper clips it could pick up.",
+    "question": "Does the number of turns of wire change the strength of an electromagnet?",
+    "statements": [
+      { "text": "With 20 turns of wire, the electromagnet picked up 9 paper clips.", "part": "E" },
+      { "text": "More turns of wire make an electromagnet stronger.", "part": "C" },
+      { "text": "With 10 turns of wire, the electromagnet picked up 4 paper clips.", "part": "E" },
+      { "text": "More turns of wire give the electromagnet a stronger magnetic force, so it can attract more paper clips.", "part": "R" }
+    ]
+  }
+]

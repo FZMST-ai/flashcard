@@ -29,7 +29,9 @@ Keep these files together in the same folder:
 | `app.js`        | How the app works.                                          |
 | `cards.json`    | **The flashcards.** Teachers edit this file.                |
 | `cards.js`      | A copy of the flashcards, made from `cards.json` (see below). |
-| `build-cards.js`| A small script that makes `cards.js` and the single-file version from `cards.json`. |
+| `cer-questions.json` | **The CER practice questions.** Teachers edit this file. |
+| `cer-questions.js` | A copy of the CER questions, made from `cer-questions.json`. |
+| `build-cards.js`| A small script that makes `cards.js`, `cer-questions.js` and the single-file version. |
 | `p3-science-flashcards.html` | The whole app in one file, made by `build-cards.js`. |
 
 Each student's progress (cards marked "I knew it" or "Still learning", and
@@ -83,6 +85,38 @@ reports an error, fix `cards.json` and run it again.
 When the app is opened from a web server it reads `cards.json` directly, and
 falls back to `cards.js` if that fails.
 
+## Editing the CER questions (for teachers)
+
+The **CER practice** tab asks students to sort statements into Claim,
+Evidence and Reasoning. The questions are in `cer-questions.json`:
+
+```json
+{
+  "id": "cer-02",
+  "topicOrder": 2,
+  "situation": "Mei put two similar plants in pots. ...",
+  "question": "Do plants need sunlight to stay healthy?",
+  "statements": [
+    { "text": "Plants use sunlight to make their own food ...", "part": "R" },
+    { "text": "Plant B turned yellow and drooped.", "part": "E" },
+    { "text": "Plants need sunlight to stay healthy.", "part": "C" },
+    { "text": "Plant A stayed green and grew taller.", "part": "E" }
+  ]
+}
+```
+
+- `topicOrder` – which flashcard topic the question belongs to. It decides
+  the colour and the order of the questions.
+- `situation` – the experiment or observation the student reads first.
+- `question` – the question the claim answers.
+- `statements` – each has the `text` and its `part`: `"C"` (claim), `"E"`
+  (evidence) or `"R"` (reasoning). Every question needs at least one of each.
+  Statements are shown in the order listed, so **mix them up** rather than
+  listing C, E, R in order.
+
+After editing, run `node build-cards.js` (see above) to update
+`cer-questions.js` and the single-file version.
+
 ## Using the app
 
 - Pick a topic, or **Study all topics** to go through every card from Topic 1
@@ -92,3 +126,8 @@ falls back to `cards.js` if that fails.
 - Move with the arrow buttons, by swiping left or right, or with the **←** and
   **→** keys. Press **1** for "I knew it" and **2** for "Still learning".
 - At the end of a deck you can review only the cards you are still learning.
+- In **CER practice**, drag each statement into the Claim, Evidence or
+  Reasoning box, or tap a statement and then tap a box. On a touch screen,
+  drag a statement by its dotted handle. Press **Check my answers** to see
+  which statements are in the right box. **Show me the answer** appears after
+  a wrong try.

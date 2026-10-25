@@ -22,6 +22,13 @@
   --radius: 18px;
   --card-radius: 24px;
   --topic: #455a64;
+  --part-C: #6d28d9;
+  --part-E: #0f766e;
+  --part-R: #b45309;
+  --good-text: #166230;
+  --good-bg: #e6f4ea;
+  --bad-text: #a3201a;
+  --bad-bg: #fdecea;
 
   --font: ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Segoe UI",
     system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -47,6 +54,10 @@
     --known: #1b7a3a;
     --known-hover: #208a43;
     --track: #303742;
+    --good-text: #7ee2a0;
+    --good-bg: #183223;
+    --bad-text: #ff9a92;
+    --bad-bg: #3a1d1d;
     color-scheme: dark;
   }
 }
@@ -66,6 +77,10 @@
   --known: #1b7a3a;
   --known-hover: #208a43;
   --track: #303742;
+  --good-text: #7ee2a0;
+  --good-bg: #183223;
+  --bad-text: #ff9a92;
+  --bad-bg: #3a1d1d;
   color-scheme: dark;
 }
 
@@ -770,6 +785,359 @@ kbd {
   color: var(--muted);
 }
 
+/* ---------- Tabs ---------- */
+
+.tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin: 0.25rem 0 1.25rem;
+  padding: 4px;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+
+.tab {
+  min-height: 52px;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 1.125rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tab[aria-selected="true"] {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 1px 4px rgba(20, 30, 50, 0.15);
+}
+
+.tab:focus-visible {
+  outline-offset: 0;
+}
+
+/* ---------- CER practice ---------- */
+
+.part-C { --part: var(--part-C); }
+.part-E { --part: var(--part-E); }
+.part-R { --part: var(--part-R); }
+
+.part-letter {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--part);
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.125rem;
+}
+
+.cer-key {
+  margin-bottom: 1rem;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.cer-key-intro {
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+.cer-key-list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cer-key-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cer-question {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.cer-topic {
+  margin: 0;
+  padding: 10px 20px;
+  background: var(--topic);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.cer-question-body {
+  display: grid;
+  gap: 10px;
+  padding: 18px 22px 20px;
+}
+
+.cer-situation {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.cer-ask {
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 1.75rem);
+  font-weight: 800;
+  text-wrap: balance;
+}
+
+.cer-instructions {
+  margin: 14px 0 10px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+.cer-board {
+  display: grid;
+  gap: 12px;
+}
+
+.cer-zones {
+  display: grid;
+  gap: 12px;
+}
+
+.dropzone {
+  display: grid;
+  gap: 8px;
+  padding: 8px 10px 12px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.zone-pool {
+  --part: var(--muted);
+  border-style: solid;
+  border-color: transparent;
+  background: var(--surface-2);
+}
+
+.has-selection .dropzone:not(.zone-pool),
+.dropzone.is-over {
+  border-style: solid;
+  border-color: var(--part);
+}
+
+.dropzone.is-over {
+  background: var(--surface-2);
+  box-shadow: 0 0 0 3px var(--part);
+}
+
+.zone-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 4px 6px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.zone-pool .zone-head {
+  justify-content: space-between;
+}
+
+.zone-text {
+  display: grid;
+}
+
+.zone-name {
+  font-weight: 800;
+  font-size: 1.125rem;
+}
+
+.zone-hint {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.chips {
+  display: grid;
+  gap: 8px;
+}
+
+.chips:empty::before {
+  content: "Drop statements here";
+  padding: 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.zone-pool .chips:empty::before {
+  content: "Every statement is in a box.";
+}
+
+.cer-chip {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+  min-height: 56px;
+  padding: 10px 14px 10px 6px;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 1.125rem;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 0.15s ease, background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.cer-chip:hover {
+  border-color: var(--muted);
+}
+
+.cer-chip.is-selected {
+  border-color: var(--primary);
+  background: var(--answer-bg);
+  box-shadow: 0 0 0 3px var(--primary);
+}
+
+.cer-chip.is-right {
+  border-color: var(--known);
+}
+
+.cer-chip.is-wrong {
+  border-color: var(--danger);
+  background: var(--bad-bg);
+}
+
+.cer-chip.is-locked {
+  cursor: default;
+}
+
+.cer-chip.is-dragging {
+  opacity: 0.35;
+}
+
+.chip-grip {
+  flex: none;
+  width: 26px;
+  min-height: 36px;
+  border-radius: 8px;
+  background-image: radial-gradient(circle, var(--muted) 2px, transparent 2.5px);
+  background-size: 9px 9px;
+  background-position: center;
+  opacity: 0.7;
+  cursor: grab;
+  touch-action: none;
+}
+
+.is-locked .chip-grip {
+  visibility: hidden;
+}
+
+.chip-text {
+  flex: 1;
+  min-width: 0;
+  align-self: center;
+}
+
+.chip-mark {
+  flex: none;
+  align-self: center;
+  font-size: 1.375rem;
+  font-weight: 800;
+}
+
+.is-right .chip-mark {
+  color: var(--good-text);
+}
+
+.is-wrong .chip-mark {
+  color: var(--bad-text);
+}
+
+.cer-ghost {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  margin: 0;
+  pointer-events: none;
+  box-shadow: var(--shadow);
+  border-color: var(--primary);
+  opacity: 0.95;
+}
+
+body.is-dragging-chip {
+  cursor: grabbing;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.cer-feedback {
+  margin: 14px 0 0;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  font-weight: 700;
+}
+
+.cer-feedback:empty {
+  display: none;
+}
+
+.cer-feedback.is-good {
+  background: var(--good-bg);
+  color: var(--good-text);
+}
+
+.cer-feedback.is-bad {
+  background: var(--bad-bg);
+  color: var(--bad-text);
+}
+
+.cer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.cer-actions .btn {
+  flex: 1 1 200px;
+  min-height: 60px;
+  font-size: 1.1875rem;
+}
+
 /* ---------- Larger screens ---------- */
 
 @media (min-width: 700px) {
@@ -842,7 +1210,9 @@ kbd {
   .btn,
   .topic-btn,
   .bar-fill,
-  .topic-banner {
+  .topic-banner,
+  .dropzone,
+  .cer-chip {
     transition: none;
   }
 

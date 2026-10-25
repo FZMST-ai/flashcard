@@ -18,18 +18,44 @@
         <p class="lead" id="overall-progress">Pick a topic to start revising.</p>
       </header>
 
-      <button type="button" id="study-all" class="btn btn-primary btn-block btn-study-all">
-        <span class="btn-study-all-title">Study all topics</span>
-        <span class="btn-study-all-meta" id="study-all-meta"></span>
-      </button>
+      <div class="tabs" role="tablist" aria-label="Activities">
+        <button type="button" role="tab" id="tab-cards" class="tab" aria-selected="true" aria-controls="panel-cards">Flashcards</button>
+        <button type="button" role="tab" id="tab-cer" class="tab" aria-selected="false" aria-controls="panel-cer" tabindex="-1">CER practice</button>
+      </div>
 
-      <h2 class="section-title">Topics</h2>
-      <ol id="topic-list" class="topic-list"></ol>
+      <div id="panel-cards" class="tab-panel" role="tabpanel" aria-labelledby="tab-cards">
+        <button type="button" id="study-all" class="btn btn-primary btn-block btn-study-all">
+          <span class="btn-study-all-title">Study all topics</span>
+          <span class="btn-study-all-meta" id="study-all-meta"></span>
+        </button>
+
+        <h2 class="section-title">Topics</h2>
+        <ol id="topic-list" class="topic-list"></ol>
+      </div>
+
+      <div id="panel-cer" class="tab-panel" role="tabpanel" aria-labelledby="tab-cer" hidden>
+        <div class="cer-key">
+          <p class="cer-key-intro">A CER answer has three parts. Sort each statement into the right part.</p>
+          <ul class="cer-key-list">
+            <li class="part-C"><span class="part-letter" aria-hidden="true">C</span><span><strong>Claim</strong> answers the question.</span></li>
+            <li class="part-E"><span class="part-letter" aria-hidden="true">E</span><span><strong>Evidence</strong> is what was seen or measured.</span></li>
+            <li class="part-R"><span class="part-letter" aria-hidden="true">R</span><span><strong>Reasoning</strong> is the science idea that explains why.</span></li>
+          </ul>
+        </div>
+
+        <button type="button" id="cer-start" class="btn btn-primary btn-block btn-study-all">
+          <span class="btn-study-all-title">Start CER practice</span>
+          <span class="btn-study-all-meta" id="cer-start-meta"></span>
+        </button>
+
+        <h2 class="section-title">Questions</h2>
+        <ol id="cer-list" class="topic-list"></ol>
+      </div>
 
       <div class="reset-area">
         <button type="button" id="reset-link" class="link-btn" aria-expanded="false" aria-controls="reset-confirm">Reset my progress</button>
         <div id="reset-confirm" class="reset-confirm" hidden>
-          <p id="reset-question"><strong>Reset all progress?</strong> This clears every card you marked and where you left off. It cannot be undone.</p>
+          <p id="reset-question"><strong>Reset all progress?</strong> This clears every card you marked, your CER results and where you left off. It cannot be undone.</p>
           <div class="btn-row">
             <button type="button" id="reset-yes" class="btn btn-danger" aria-describedby="reset-question">Yes, reset</button>
             <button type="button" id="reset-no" class="btn btn-secondary">Cancel</button>
@@ -127,11 +153,93 @@
       </div>
     </section>
 
+    <!-- CER practice: sort statements into Claim, Evidence and Reasoning -->
+    <section id="screen-cer" class="screen screen-cer" aria-labelledby="cer-title" hidden>
+      <div class="study-top">
+        <button type="button" id="cer-back" class="btn btn-ghost btn-back">
+          <span aria-hidden="true">←</span> Back to CER list
+        </button>
+        <p id="cer-count" class="study-mode"></p>
+      </div>
+
+      <article class="cer-question" id="cer-question">
+        <p class="cer-topic" id="cer-topic"></p>
+        <div class="cer-question-body">
+          <p class="cer-situation" id="cer-situation"></p>
+          <h2 class="cer-ask" id="cer-title" tabindex="-1"></h2>
+        </div>
+      </article>
+
+      <p class="cer-instructions" id="cer-instructions">Drag each statement into the right box, or tap a statement and then tap a box.</p>
+
+      <div class="cer-board">
+        <div class="dropzone zone-pool" data-zone="pool" id="zone-pool">
+          <button type="button" class="zone-head" data-zone="pool">
+            <span class="zone-name">Statements</span>
+            <span class="zone-hint" id="pool-hint"></span>
+          </button>
+          <div class="chips" id="chips-pool"></div>
+        </div>
+        <div class="cer-zones">
+          <div class="dropzone part-C" data-zone="C">
+            <button type="button" class="zone-head" data-zone="C">
+              <span class="part-letter" aria-hidden="true">C</span>
+              <span class="zone-text"><span class="zone-name">Claim</span><span class="zone-hint">Answers the question</span></span>
+            </button>
+            <div class="chips" id="chips-C"></div>
+          </div>
+          <div class="dropzone part-E" data-zone="E">
+            <button type="button" class="zone-head" data-zone="E">
+              <span class="part-letter" aria-hidden="true">E</span>
+              <span class="zone-text"><span class="zone-name">Evidence</span><span class="zone-hint">What was seen or measured</span></span>
+            </button>
+            <div class="chips" id="chips-E"></div>
+          </div>
+          <div class="dropzone part-R" data-zone="R">
+            <button type="button" class="zone-head" data-zone="R">
+              <span class="part-letter" aria-hidden="true">R</span>
+              <span class="zone-text"><span class="zone-name">Reasoning</span><span class="zone-hint">The science idea that explains why</span></span>
+            </button>
+            <div class="chips" id="chips-R"></div>
+          </div>
+        </div>
+      </div>
+
+      <p id="cer-feedback" class="cer-feedback" role="status" aria-live="polite"></p>
+
+      <div class="cer-actions">
+        <button type="button" id="cer-check" class="btn btn-primary">Check my answers</button>
+        <button type="button" id="cer-reveal" class="btn btn-secondary" hidden>Show me the answer</button>
+        <button type="button" id="cer-next" class="btn btn-primary" hidden>Next question <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <!-- End of CER practice -->
+    <section id="screen-cer-end" class="screen screen-narrow" aria-labelledby="cer-end-title" hidden>
+      <h2 id="cer-end-title" tabindex="-1">CER practice done!</h2>
+      <p id="cer-end-text" class="lead"></p>
+      <div class="end-stats">
+        <div class="stat stat-known">
+          <span class="stat-num" id="cer-end-first">0</span>
+          <span class="stat-label">Right first time</span>
+        </div>
+        <div class="stat stat-learning">
+          <span class="stat-num" id="cer-end-more">0</span>
+          <span class="stat-label">Needed another go</span>
+        </div>
+      </div>
+      <div class="btn-stack">
+        <button type="button" id="cer-end-again" class="btn btn-primary btn-block">Practise again</button>
+        <button type="button" id="cer-end-back" class="btn btn-ghost btn-block">Back to CER list</button>
+      </div>
+    </section>
+
   </main>
 
   <div id="sr-live" class="visually-hidden" aria-live="polite"></div>
 
   <script src="cards.js"></script>
+  <script src="cer-questions.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
