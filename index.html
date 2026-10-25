@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-SG">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Flashcards to help Primary 3 students revise Science topics.">
+  <title>P3 Science Flashcards</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app">
+
+    <!-- Home: list of topics -->
+    <section id="screen-home" class="screen" aria-labelledby="home-title">
+      <header class="home-header">
+        <h1 id="home-title" tabindex="-1">P3 Science Flashcards</h1>
+        <p class="lead" id="overall-progress">Pick a topic to start revising.</p>
+      </header>
+
+      <button type="button" id="study-all" class="btn btn-primary btn-block btn-study-all">
+        <span class="btn-study-all-title">Study all topics</span>
+        <span class="btn-study-all-meta" id="study-all-meta"></span>
+      </button>
+
+      <h2 class="section-title">Topics</h2>
+      <ol id="topic-list" class="topic-list"></ol>
+
+      <div class="reset-area">
+        <button type="button" id="reset-link" class="link-btn" aria-expanded="false" aria-controls="reset-confirm">Reset my progress</button>
+        <div id="reset-confirm" class="reset-confirm" hidden>
+          <p id="reset-question"><strong>Reset all progress?</strong> This clears every card you marked and where you left off. It cannot be undone.</p>
+          <div class="btn-row">
+            <button type="button" id="reset-yes" class="btn btn-danger" aria-describedby="reset-question">Yes, reset</button>
+            <button type="button" id="reset-no" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
+        <p id="reset-done" class="reset-done" role="status"></p>
+      </div>
+
+      <p id="storage-note" class="storage-note" hidden>Your progress can't be saved on this device right now, but you can still study.</p>
+    </section>
+
+    <!-- Continue where you left off -->
+    <section id="screen-resume" class="screen screen-narrow" aria-labelledby="resume-title" hidden>
+      <h2 id="resume-title" tabindex="-1">Welcome back!</h2>
+      <p id="resume-text" class="lead"></p>
+      <div class="btn-stack">
+        <button type="button" id="resume-continue" class="btn btn-primary btn-block">Continue where you left off</button>
+        <button type="button" id="resume-restart" class="btn btn-secondary btn-block">Start from the first card</button>
+        <button type="button" id="resume-back" class="btn btn-ghost btn-block">Back to topics</button>
+      </div>
+    </section>
+
+    <!-- Study -->
+    <section id="screen-study" class="screen screen-study" aria-labelledby="study-title" hidden>
+      <div class="study-top">
+        <button type="button" id="study-back" class="btn btn-ghost btn-back">
+          <span aria-hidden="true">←</span> Back to topics
+        </button>
+        <h2 id="study-title" class="study-mode"></h2>
+      </div>
+
+      <div class="study-meta">
+        <p id="position" class="position"></p>
+        <p id="card-status" class="card-status"></p>
+      </div>
+
+      <div class="card-stage" id="card-stage">
+        <div id="topic-banner" class="topic-banner" role="status" aria-live="polite"></div>
+        <button type="button" id="card" class="card">
+          <span class="card-inner">
+            <span class="face face-front" id="face-front">
+              <span class="face-header"><span class="face-topic"></span></span>
+              <span class="face-label">Question</span>
+              <span class="face-body"><span class="face-text"></span></span>
+              <span class="face-hint" aria-hidden="true">Tap to see the answer</span>
+            </span>
+            <span class="face face-back" id="face-back">
+              <span class="face-header"><span class="face-topic"></span></span>
+              <span class="face-label">Answer</span>
+              <span class="face-body"><span class="face-text"></span></span>
+              <span class="face-hint" aria-hidden="true">Tap to see the question</span>
+            </span>
+          </span>
+        </button>
+      </div>
+
+      <div class="mark-row" id="mark-row">
+        <button type="button" id="btn-known" class="btn btn-known" aria-label="I knew it" aria-keyshortcuts="1">I knew it <span aria-hidden="true">✓</span></button>
+        <button type="button" id="btn-learning" class="btn btn-learning" aria-label="Still learning" aria-keyshortcuts="2">Still learning <span aria-hidden="true">↻</span></button>
+      </div>
+
+      <div class="nav-row">
+        <button type="button" id="btn-prev" class="btn btn-secondary btn-nav" aria-label="Previous card" aria-keyshortcuts="ArrowLeft">
+          <span aria-hidden="true">←</span> <span class="btn-nav-text">Previous</span>
+        </button>
+        <p class="kbd-hint" aria-hidden="true">
+          <kbd>Space</kbd> flip · <kbd>←</kbd> <kbd>→</kbd> move · <kbd>1</kbd> knew it · <kbd>2</kbd> still learning
+        </p>
+        <button type="button" id="btn-next" class="btn btn-secondary btn-nav" aria-label="Next card" aria-keyshortcuts="ArrowRight">
+          <span class="btn-nav-text">Next</span> <span aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- End of deck -->
+    <section id="screen-end" class="screen screen-narrow" aria-labelledby="end-title" hidden>
+      <h2 id="end-title" tabindex="-1">Well done!</h2>
+      <p id="end-text" class="lead"></p>
+      <div class="end-stats">
+        <div class="stat stat-known">
+          <span class="stat-num" id="end-known">0</span>
+          <span class="stat-label">I knew it <span aria-hidden="true">✓</span></span>
+        </div>
+        <div class="stat stat-learning">
+          <span class="stat-num" id="end-learning">0</span>
+          <span class="stat-label">Still learning <span aria-hidden="true">↻</span></span>
+        </div>
+      </div>
+      <p id="end-unmarked" class="end-unmarked" hidden></p>
+      <div class="btn-stack">
+        <button type="button" id="end-review" class="btn btn-learning btn-block">Review the ones I'm still learning</button>
+        <button type="button" id="end-next-topic" class="btn btn-primary btn-block"></button>
+        <button type="button" id="end-restart" class="btn btn-secondary btn-block">Start this topic again</button>
+        <button type="button" id="end-back" class="btn btn-ghost btn-block">Back to topics</button>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="sr-live" class="visually-hidden" aria-live="polite"></div>
+
+  <script src="cards.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
