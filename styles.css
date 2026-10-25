@@ -26,11 +26,13 @@
   --font: ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Segoe UI",
     system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
 
-  color-scheme: light dark;
+  color-scheme: light;
 }
 
+/* Dark theme: follows the device setting unless a light theme is chosen
+   explicitly with data-theme="light"; data-theme="dark" forces it on. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #111418;
     --surface: #1b1f26;
     --surface-2: #252b34;
@@ -45,7 +47,26 @@
     --known: #1b7a3a;
     --known-hover: #208a43;
     --track: #303742;
+    color-scheme: dark;
   }
+}
+
+:root[data-theme="dark"] {
+  --bg: #111418;
+  --surface: #1b1f26;
+  --surface-2: #252b34;
+  --answer-bg: #1f2530;
+  --text: #eef1f5;
+  --muted: #b4bcc8;
+  --border: #353d49;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --focus: #8ab4ff;
+  --primary: #2f5fe0;
+  --primary-hover: #3d6cf0;
+  --known: #1b7a3a;
+  --known-hover: #208a43;
+  --track: #303742;
+  color-scheme: dark;
 }
 
 *,
