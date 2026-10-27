@@ -324,3 +324,5 @@ window.CARDS = [
     "back": "Increase the number of turns of wire, or increase the number of batteries."
   }
 ];
+// Teacher editor password (stored as a hash), from editor-settings.json.
+window.EDITOR_PASSWORD_HASH = "ce290141e850ee49591a17ece91f9a50a10548fcbc8d71a8702a07f08f6e0f2b";

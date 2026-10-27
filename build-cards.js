@@ -5,14 +5,22 @@
 // single-file version, p3-science-flashcards.html.
 //
 // Usage: node build-cards.js
+//        node build-cards.js --set-password <new password>
 
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const standalonePath = 'p3-science-flashcards.html';
 const CER_PARTS = ['C', 'E', 'R'];
+const settingsPath = path.join(__dirname, 'editor-settings.json');
+
+// Must match passwordHash() in app.js.
+const PASSWORD_SALT = 'p3-flashcards:';
+const hashPassword = (password) =>
+  crypto.createHash('sha256').update(PASSWORD_SALT + password, 'utf8').digest('hex');
 
 function fail(message) {
   console.error('Error: ' + message);
@@ -37,6 +45,22 @@ function writeDataScript(fileName, sourceName, globalName, data) {
     '// edit ' + sourceName + ', then run `node build-cards.js`.\n' +
     'window.' + globalName + ' = ' + JSON.stringify(data, null, 2) + ';\n';
   fs.writeFileSync(path.join(__dirname, fileName), output, 'utf8');
+}
+
+// ---------- Teacher editor password ----------
+
+const setPasswordAt = process.argv.indexOf('--set-password');
+if (setPasswordAt !== -1) {
+  const password = process.argv[setPasswordAt + 1];
+  if (!password) fail('give the new password after --set-password.');
+  fs.writeFileSync(settingsPath,
+    JSON.stringify({ passwordHash: hashPassword(password) }, null, 2) + '\n', 'utf8');
+  console.log('Saved the new editor password in editor-settings.json.');
+}
+
+const settings = readJson('editor-settings.json');
+if (!/^[0-9a-f]{64}$/.test(settings.passwordHash || '')) {
+  fail('editor-settings.json needs a "passwordHash". Run: node build-cards.js --set-password <password>');
 }
 
 // ---------- Flashcards ----------
@@ -106,17 +130,23 @@ cer.forEach((q, i) => {
 // ---------- Write files ----------
 
 writeDataScript('cards.js', 'cards.json', 'CARDS', cards);
+fs.appendFileSync(path.join(__dirname, 'cards.js'),
+  '// Teacher editor password (stored as a hash), from editor-settings.json.\n' +
+  'window.EDITOR_PASSWORD_HASH = ' + JSON.stringify(settings.passwordHash) + ';\n', 'utf8');
 writeDataScript('cer-questions.js', 'cer-questions.json', 'CER_QUESTIONS', cer);
 
 // One self-contained HTML file (styles, data and app all inside), which is
-// easy to email, upload or share as a single file.
+// easy to email, upload or share as a single file. The editor's "Download
+// updated app" rewrites the #app-data script in the same format (see
+// dataScriptText() in app.js).
 const read = (name) => fs.readFileSync(path.join(__dirname, name), 'utf8');
 const inlineJson = (data) => JSON.stringify(data, null, 2).replace(/<\//g, '<\\/');
 const standalone = read('index.html')
   .replace('<link rel="stylesheet" href="styles.css">', () => '<style>\n' + read('styles.css') + '</style>')
   .replace('<script src="cards.js"></script>', () =>
-    '<script>\nwindow.CARDS_INLINE = true;\nwindow.CARDS = ' + inlineJson(cards) + ';\n' +
-    'window.CER_QUESTIONS = ' + inlineJson(cer) + ';\n</script>')
+    '<script id="app-data">\nwindow.CARDS_INLINE = true;\nwindow.CARDS = ' + inlineJson(cards) + ';\n' +
+    'window.CER_QUESTIONS = ' + inlineJson(cer) + ';\n' +
+    'window.EDITOR_PASSWORD_HASH = ' + JSON.stringify(settings.passwordHash) + ';\n</script>')
   .replace('<script src="cer-questions.js"></script>\n', '')
   .replace('<script src="app.js"></script>', () => '<script>\n' + read('app.js') + '</script>');
 fs.writeFileSync(path.join(__dirname, standalonePath), standalone, 'utf8');

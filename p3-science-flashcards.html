@@ -1153,6 +1153,251 @@ body.is-dragging-chip {
   font-size: 1.1875rem;
 }
 
+/* ---------- Teacher editor ---------- */
+
+.edits-notice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin: 0 0 1.25rem;
+  padding: 12px 16px;
+  border: 2px solid var(--learning);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.edits-notice p {
+  flex: 1 1 240px;
+  margin: 0;
+  font-weight: 700;
+}
+
+.reset-area {
+  display: grid;
+  justify-items: center;
+}
+
+#unlock-title {
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.25rem);
+  font-weight: 800;
+}
+
+.form-stack {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+}
+
+.field-label {
+  margin: 8px 0 0;
+  font-weight: 700;
+}
+
+.field-label-small {
+  margin-top: 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.field-hint {
+  margin: -4px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.field-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+textarea.field-input {
+  resize: vertical;
+}
+
+.field-input:focus-visible {
+  outline-offset: 0;
+  border-color: var(--focus);
+}
+
+.field-error,
+.field-ok {
+  margin: 0;
+  font-weight: 700;
+}
+
+.field-error {
+  color: var(--bad-text);
+}
+
+.field-ok {
+  color: var(--good-text);
+}
+
+.field-error:empty,
+.field-ok:empty {
+  display: none;
+}
+
+.btn-small {
+  min-height: 44px;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+}
+
+.btn-icon {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.danger-link {
+  color: var(--bad-text);
+}
+
+.danger-link:hover {
+  color: var(--bad-text);
+}
+
+.discard-area {
+  display: grid;
+  justify-items: start;
+  margin-top: 1rem;
+}
+
+.editor-title {
+  margin: 4px 0 14px;
+  font-size: clamp(1.625rem, 1.3rem + 1.5vw, 2rem);
+  font-weight: 800;
+}
+
+.editor-panel {
+  margin-bottom: 1rem;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.editor-panel > p {
+  margin: 0 0 12px;
+}
+
+.editor-panel h3 {
+  margin: 0 0 4px;
+  font-size: 1.25rem;
+}
+
+.export-status {
+  margin: 12px 0 0;
+  color: var(--muted);
+}
+
+.export-status:empty {
+  display: none;
+}
+
+.editor-list {
+  display: grid;
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.editor-topic {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-left: 8px solid var(--topic);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.editor-topic-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.editor-topic-name {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.25;
+}
+
+.rename-form {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.rename-form .field-input {
+  flex: 1 1 200px;
+}
+
+.editor-cards {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.editor-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+
+.editor-card-text {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+
+.editor-front {
+  margin: 0;
+  font-weight: 700;
+}
+
+.editor-back {
+  display: -webkit-box;
+  margin: 2px 0 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 1rem;
+  white-space: pre-line;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.editor-card-actions {
+  display: flex;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.editor-add-here {
+  margin-top: 8px;
+}
+
 /* ---------- Larger screens ---------- */
 
 @media (min-width: 700px) {
@@ -1257,6 +1502,11 @@ body.is-dragging-chip {
         <p class="lead" id="overall-progress">Pick a topic to start revising.</p>
       </header>
 
+      <div id="edits-notice" class="edits-notice" hidden>
+        <p>This device is showing edited flashcards that are not in the app file yet.</p>
+        <button type="button" id="edits-open" class="btn btn-secondary">Open the teacher editor</button>
+      </div>
+
       <div class="tabs" role="tablist" aria-label="Activities">
         <button type="button" role="tab" id="tab-cards" class="tab" aria-selected="true" aria-controls="panel-cards">Flashcards</button>
         <button type="button" role="tab" id="tab-cer" class="tab" aria-selected="false" aria-controls="panel-cer" tabindex="-1">CER practice</button>
@@ -1301,6 +1551,7 @@ body.is-dragging-chip {
           </div>
         </div>
         <p id="reset-done" class="reset-done" role="status"></p>
+        <button type="button" id="editor-link" class="link-btn">Teacher: edit flashcards</button>
       </div>
 
       <p id="storage-note" class="storage-note" hidden>Your progress can't be saved on this device right now, but you can still study.</p>
@@ -1474,11 +1725,106 @@ body.is-dragging-chip {
       </div>
     </section>
 
+    <!-- Teacher editor: password -->
+    <section id="screen-unlock" class="screen screen-narrow" aria-labelledby="unlock-title" hidden>
+      <h2 id="unlock-title" tabindex="-1">Teacher editor</h2>
+      <p class="lead">Enter the teacher password to add or change flashcards.</p>
+      <form id="unlock-form" class="form-stack" novalidate>
+        <label for="unlock-password" class="field-label">Password</label>
+        <input id="unlock-password" class="field-input" type="password" autocomplete="current-password" aria-describedby="unlock-error">
+        <p id="unlock-error" class="field-error" role="alert"></p>
+        <button type="submit" class="btn btn-primary btn-block">Unlock</button>
+        <button type="button" id="unlock-back" class="btn btn-ghost btn-block">Back to topics</button>
+      </form>
+    </section>
+
+    <!-- Teacher editor: list of cards -->
+    <section id="screen-editor" class="screen" aria-labelledby="editor-title" hidden>
+      <div class="study-top">
+        <button type="button" id="editor-back" class="btn btn-ghost btn-back">
+          <span aria-hidden="true">←</span> Back to topics
+        </button>
+        <button type="button" id="editor-lock" class="btn btn-ghost btn-back">Lock editor</button>
+      </div>
+      <h2 id="editor-title" class="editor-title" tabindex="-1">Edit flashcards</h2>
+
+      <div class="editor-panel" id="editor-save">
+        <p id="editor-save-text"></p>
+        <div class="btn-row">
+          <button type="button" id="export-html" class="btn btn-primary">Download updated app</button>
+          <button type="button" id="export-json" class="btn btn-secondary">Download cards.json</button>
+        </div>
+        <p id="export-status" class="export-status" role="status"></p>
+      </div>
+
+      <button type="button" id="editor-add" class="btn btn-primary btn-block">+ Add a card</button>
+      <div id="editor-list" class="editor-list"></div>
+
+      <div class="editor-panel editor-settings">
+        <h3>Settings</h3>
+        <form id="password-form" class="form-stack" novalidate>
+          <p class="field-label">Change the teacher password</p>
+          <label for="new-password" class="field-label field-label-small">New password</label>
+          <input id="new-password" class="field-input" type="password" autocomplete="new-password">
+          <label for="new-password-again" class="field-label field-label-small">Type it again</label>
+          <input id="new-password-again" class="field-input" type="password" autocomplete="new-password">
+          <p id="password-message" class="field-error" role="status"></p>
+          <button type="submit" class="btn btn-secondary">Save new password</button>
+        </form>
+        <div class="discard-area">
+          <button type="button" id="discard-link" class="link-btn danger-link" aria-expanded="false" aria-controls="discard-confirm">Undo all my changes</button>
+          <div id="discard-confirm" class="reset-confirm" hidden>
+            <p id="discard-question"><strong>Undo all changes?</strong> This puts back the flashcards and password that came with this app file.</p>
+            <div class="btn-row">
+              <button type="button" id="discard-yes" class="btn btn-danger" aria-describedby="discard-question">Yes, undo</button>
+              <button type="button" id="discard-no" class="btn btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teacher editor: add or edit one card -->
+    <section id="screen-card-form" class="screen" aria-labelledby="card-form-title" hidden>
+      <div class="study-top">
+        <button type="button" id="card-form-back" class="btn btn-ghost btn-back">
+          <span aria-hidden="true">←</span> Back to editor
+        </button>
+      </div>
+      <h2 id="card-form-title" class="editor-title" tabindex="-1">Add a card</h2>
+      <form id="card-form" class="form-stack" novalidate>
+        <label for="card-topic" class="field-label">Topic</label>
+        <select id="card-topic" class="field-input"></select>
+        <div id="new-topic-field" class="form-stack" hidden>
+          <label for="card-new-topic" class="field-label">New topic name</label>
+          <input id="card-new-topic" class="field-input" type="text" placeholder="For example: Chapter 8: Light">
+        </div>
+        <label for="card-front" class="field-label">Question (front of the card)</label>
+        <textarea id="card-front" class="field-input" rows="3"></textarea>
+        <label for="card-back" class="field-label">Answer (back of the card)</label>
+        <p id="card-back-hint" class="field-hint">Press Enter to start a new line, for example for a list.</p>
+        <textarea id="card-back" class="field-input" rows="5" aria-describedby="card-back-hint"></textarea>
+        <p id="card-form-error" class="field-error" role="alert"></p>
+        <button type="submit" class="btn btn-primary btn-block">Save card</button>
+        <button type="button" id="card-form-cancel" class="btn btn-ghost btn-block">Cancel</button>
+      </form>
+      <div id="card-delete-area" class="discard-area">
+        <button type="button" id="card-delete" class="link-btn danger-link" aria-expanded="false" aria-controls="card-delete-confirm">Delete this card</button>
+        <div id="card-delete-confirm" class="reset-confirm" hidden>
+          <p id="card-delete-question"><strong>Delete this card?</strong> It will be removed from the app.</p>
+          <div class="btn-row">
+            <button type="button" id="card-delete-yes" class="btn btn-danger" aria-describedby="card-delete-question">Yes, delete</button>
+            <button type="button" id="card-delete-no" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <div id="sr-live" class="visually-hidden" aria-live="polite"></div>
 
-  <script>
+  <script id="app-data">
 window.CARDS_INLINE = true;
 window.CARDS = [
   {
@@ -2220,18 +2566,28 @@ window.CER_QUESTIONS = [
     ]
   }
 ];
+window.EDITOR_PASSWORD_HASH = "ce290141e850ee49591a17ece91f9a50a10548fcbc8d71a8702a07f08f6e0f2b";
 </script>
     <script>
 /* P3 Science Flashcards
  *
  * Card data comes from cards.json (when served over http) or from cards.js,
  * which sets window.CARDS (used when index.html is opened straight from disk).
+ * The single-file version has the data in its own <script id="app-data">.
  * Cards are always shown in topic order, then in the order they are listed.
  */
 (function () {
   'use strict';
 
+  // A copy of the page as it was loaded, before the app changes anything.
+  // The teacher editor rebuilds the single-file app from it.
+  var PRISTINE_PAGE = document.getElementById('app-data')
+    ? document.documentElement.cloneNode(true)
+    : null;
+
   var STORAGE_KEY = 'p3-science-flashcards:v1';
+  var EDITS_KEY = 'p3-science-flashcards:edits';
+  var PASSWORD_SALT = 'p3-flashcards:'; // must match build-cards.js
 
   // One colour per topic, in topic order. All pass WCAG AA with white text.
   var TOPIC_COLOURS = [
@@ -2278,7 +2634,10 @@ window.CER_QUESTIONS = [
       study: $('screen-study'),
       end: $('screen-end'),
       cer: $('screen-cer'),
-      cerEnd: $('screen-cer-end')
+      cerEnd: $('screen-cer-end'),
+      unlock: $('screen-unlock'),
+      editor: $('screen-editor'),
+      cardForm: $('screen-card-form')
     },
     homeTitle: $('home-title'),
     overallProgress: $('overall-progress'),
@@ -2357,6 +2716,47 @@ window.CER_QUESTIONS = [
     cerEndMore: $('cer-end-more'),
     cerEndAgain: $('cer-end-again'),
     cerEndBack: $('cer-end-back'),
+
+    editsNotice: $('edits-notice'),
+    editsOpen: $('edits-open'),
+    editorLink: $('editor-link'),
+    unlockTitle: $('unlock-title'),
+    unlockForm: $('unlock-form'),
+    unlockPassword: $('unlock-password'),
+    unlockError: $('unlock-error'),
+    unlockBack: $('unlock-back'),
+    editorBack: $('editor-back'),
+    editorLock: $('editor-lock'),
+    editorTitle: $('editor-title'),
+    editorSaveText: $('editor-save-text'),
+    exportHtml: $('export-html'),
+    exportJson: $('export-json'),
+    exportStatus: $('export-status'),
+    editorAdd: $('editor-add'),
+    editorList: $('editor-list'),
+    passwordForm: $('password-form'),
+    newPassword: $('new-password'),
+    newPasswordAgain: $('new-password-again'),
+    passwordMessage: $('password-message'),
+    discardLink: $('discard-link'),
+    discardConfirm: $('discard-confirm'),
+    discardYes: $('discard-yes'),
+    discardNo: $('discard-no'),
+    cardFormBack: $('card-form-back'),
+    cardFormTitle: $('card-form-title'),
+    cardForm: $('card-form'),
+    cardTopic: $('card-topic'),
+    newTopicField: $('new-topic-field'),
+    cardNewTopic: $('card-new-topic'),
+    cardFront: $('card-front'),
+    cardBack: $('card-back'),
+    cardFormError: $('card-form-error'),
+    cardFormCancel: $('card-form-cancel'),
+    cardDeleteArea: $('card-delete-area'),
+    cardDelete: $('card-delete'),
+    cardDeleteConfirm: $('card-delete-confirm'),
+    cardDeleteYes: $('card-delete-yes'),
+    cardDeleteNo: $('card-delete-no'),
 
     srLive: $('sr-live')
   };
@@ -2558,6 +2958,10 @@ window.CER_QUESTIONS = [
   }
 
   function renderHome() {
+    el.editsNotice.hidden = !hasEdits();
+    // Inside the claude.ai viewer the page can't save files, so the editor
+    // (which works by downloading an updated app) is left out there.
+    el.editorLink.hidden = !!(window.claude && window.claude.use);
     var total = cards.length;
     var known = countKnown(scopeIndexes('all'));
     renderCerList();
@@ -3351,10 +3755,594 @@ window.CER_QUESTIONS = [
     });
   }
 
+  // ---------- Teacher editor ----------
+  // Teachers add, edit, reorder and delete flashcards after entering a
+  // password. There is no server, so changes are kept in this browser and
+  // shared by downloading an updated app file. The password only keeps
+  // students out of the editor; it is not strong security.
+
+  var builtInDeck = [];       // the cards that came with this app file
+  var builtInHash = '';       // the password hash that came with this app file
+  var rawCer = [];            // CER questions as loaded, kept for exports
+  var deck = [];              // the cards in use: { id, topicOrder, topic, front, back }
+  var edits = { cards: null, passwordHash: null }; // unsaved changes on this device
+  var editorUnlocked = false;
+  var editingId = null;       // card open in the form, or null for a new card
+  var renamingTopic = null;   // topic order being renamed in the list
+
+  function plainCard(c) {
+    return { id: c.id, topicOrder: c.topicOrder, topic: c.topic, front: c.front, back: c.back };
+  }
+
+  // Puts a list of cards into use: sorts it the way the app shows it and
+  // rebuilds the topics.
+  function setDeck(list) {
+    prepareCards(list);
+    deck = cards.map(plainCard);
+  }
+
+  function sameDeck(a, b) {
+    return JSON.stringify(a.map(plainCard)) === JSON.stringify(b.map(plainCard));
+  }
+
+  function hasEdits() {
+    return !!(edits.cards || edits.passwordHash);
+  }
+
+  function currentPasswordHash() {
+    return edits.passwordHash || builtInHash;
+  }
+
+  function loadEdits() {
+    var raw = null;
+    try {
+      raw = window.localStorage.getItem(EDITS_KEY);
+    } catch (e) {
+      return;
+    }
+    if (!raw) return;
+    try {
+      var parsed = JSON.parse(raw);
+      if (parsed && Array.isArray(parsed.cards) && parsed.cards.length) edits.cards = parsed.cards;
+      if (parsed && typeof parsed.passwordHash === 'string') edits.passwordHash = parsed.passwordHash;
+    } catch (e) {
+      // Corrupt data: ignore it.
+    }
+    // Once the edits have been exported and that file is the one open, they
+    // are no longer "unsaved", so forget them.
+    if (edits.cards && sameDeck(edits.cards, builtInDeck)) edits.cards = null;
+    if (edits.passwordHash === builtInHash) edits.passwordHash = null;
+    saveEdits();
+  }
+
+  function saveEdits() {
+    edits.cards = edits.cards && sameDeck(edits.cards, builtInDeck) ? null : edits.cards;
+    try {
+      if (hasEdits()) window.localStorage.setItem(EDITS_KEY, JSON.stringify(edits));
+      else window.localStorage.removeItem(EDITS_KEY);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Applies a change to the cards and keeps it on this device.
+  function commitDeck(list) {
+    setDeck(list);
+    edits.cards = deck.map(plainCard);
+    saveEdits();
+  }
+
+  // SHA-256 as hex, so the password itself is never stored in the app.
+  function sha256Hex(text) {
+    var bytes = new TextEncoder().encode(text);
+    var K = [];
+    var H = [];
+    var candidate = 2;
+    while (K.length < 64) {
+      var isPrime = true;
+      for (var f = 2; f * f <= candidate; f++) {
+        if (candidate % f === 0) { isPrime = false; break; }
+      }
+      if (isPrime) {
+        if (H.length < 8) H.push((Math.pow(candidate, 1 / 2) * 4294967296) | 0);
+        K.push((Math.pow(candidate, 1 / 3) * 4294967296) | 0);
+      }
+      candidate += 1;
+    }
+    var total = Math.ceil((bytes.length + 9) / 64) * 64;
+    var msg = new Uint8Array(total);
+    msg.set(bytes);
+    msg[bytes.length] = 0x80;
+    var view = new DataView(msg.buffer);
+    view.setUint32(total - 8, Math.floor(bytes.length / 0x20000000));
+    view.setUint32(total - 4, (bytes.length * 8) >>> 0);
+
+    function ror(x, n) { return (x >>> n) | (x << (32 - n)); }
+    var w = new Array(64);
+    for (var off = 0; off < total; off += 64) {
+      var i;
+      for (i = 0; i < 16; i++) w[i] = view.getUint32(off + i * 4);
+      for (i = 16; i < 64; i++) {
+        var s0 = ror(w[i - 15], 7) ^ ror(w[i - 15], 18) ^ (w[i - 15] >>> 3);
+        var s1 = ror(w[i - 2], 17) ^ ror(w[i - 2], 19) ^ (w[i - 2] >>> 10);
+        w[i] = (w[i - 16] + s0 + w[i - 7] + s1) | 0;
+      }
+      var a = H[0], b = H[1], c = H[2], d = H[3], e = H[4], g = H[5], h2 = H[6], h = H[7];
+      for (i = 0; i < 64; i++) {
+        var t1 = (h + (ror(e, 6) ^ ror(e, 11) ^ ror(e, 25)) + ((e & g) ^ (~e & h2)) + K[i] + w[i]) | 0;
+        var t2 = ((ror(a, 2) ^ ror(a, 13) ^ ror(a, 22)) + ((a & b) ^ (a & c) ^ (b & c))) | 0;
+        h = h2; h2 = g; g = e; e = (d + t1) | 0;
+        d = c; c = b; b = a; a = (t1 + t2) | 0;
+      }
+      H[0] = (H[0] + a) | 0; H[1] = (H[1] + b) | 0; H[2] = (H[2] + c) | 0; H[3] = (H[3] + d) | 0;
+      H[4] = (H[4] + e) | 0; H[5] = (H[5] + g) | 0; H[6] = (H[6] + h2) | 0; H[7] = (H[7] + h) | 0;
+    }
+    return H.map(function (x) { return ('0000000' + (x >>> 0).toString(16)).slice(-8); }).join('');
+  }
+
+  function passwordHash(password) {
+    return sha256Hex(PASSWORD_SALT + password);
+  }
+
+  function openEditor() {
+    if (editorUnlocked) {
+      showEditor();
+      return;
+    }
+    el.unlockPassword.value = '';
+    el.unlockError.textContent = '';
+    showScreen('unlock', el.unlockPassword);
+  }
+
+  function showEditor(focusTarget) {
+    renamingTopic = null;
+    renderEditor();
+    showScreen('editor', focusTarget || el.editorTitle);
+  }
+
+  function renderEditorSaveText() {
+    var changed = !!edits.cards || !!edits.passwordHash;
+    el.editorSaveText.textContent = !changed
+      ? 'No changes yet. Changes you make are kept on this device until you download the updated app.'
+      : PRISTINE_PAGE
+        ? 'You have changes that are only on this device. Download the updated app and share that file with students.'
+        : 'You have changes that are only on this device. Download cards.json, put it in the app folder and run "node build-cards.js".';
+    el.exportHtml.hidden = !PRISTINE_PAGE;
+  }
+
+  function renderEditor() {
+    renderEditorSaveText();
+    var list = el.editorList;
+    list.textContent = '';
+    topics.forEach(function (topic) {
+      var section = document.createElement('section');
+      section.className = 'editor-topic';
+      section.style.setProperty('--topic', topic.colour);
+
+      var head = document.createElement('div');
+      head.className = 'editor-topic-head';
+      var num = document.createElement('span');
+      num.className = 'topic-num';
+      num.setAttribute('aria-hidden', 'true');
+      num.textContent = String(topics.indexOf(topic) + 1);
+      head.appendChild(num);
+
+      if (renamingTopic === topic.order) {
+        var form = document.createElement('form');
+        form.className = 'rename-form';
+        form.setAttribute('data-topic', String(topic.order));
+        var label = document.createElement('label');
+        label.className = 'visually-hidden';
+        label.setAttribute('for', 'rename-input');
+        label.textContent = 'Topic name';
+        var input = document.createElement('input');
+        input.id = 'rename-input';
+        input.className = 'field-input';
+        input.type = 'text';
+        input.value = topic.name;
+        var save = document.createElement('button');
+        save.type = 'submit';
+        save.className = 'btn btn-primary btn-small';
+        save.textContent = 'Save';
+        var cancel = document.createElement('button');
+        cancel.type = 'button';
+        cancel.className = 'btn btn-ghost btn-small';
+        cancel.setAttribute('data-action', 'rename-cancel');
+        cancel.textContent = 'Cancel';
+        form.appendChild(label);
+        form.appendChild(input);
+        form.appendChild(save);
+        form.appendChild(cancel);
+        head.appendChild(form);
+      } else {
+        var name = document.createElement('h3');
+        name.className = 'editor-topic-name';
+        name.textContent = topic.name;
+        var rename = document.createElement('button');
+        rename.type = 'button';
+        rename.className = 'btn btn-ghost btn-small';
+        rename.setAttribute('data-action', 'rename');
+        rename.setAttribute('data-topic', String(topic.order));
+        rename.setAttribute('aria-label', 'Rename topic: ' + topic.name);
+        rename.textContent = 'Rename';
+        head.appendChild(name);
+        head.appendChild(rename);
+      }
+      section.appendChild(head);
+
+      var ol = document.createElement('ol');
+      ol.className = 'editor-cards';
+      topic.cardIndexes.forEach(function (index, pos) {
+        var card = cards[index];
+        var li = document.createElement('li');
+        li.className = 'editor-card';
+        li.setAttribute('data-id', card.id);
+
+        var text = document.createElement('div');
+        text.className = 'editor-card-text';
+        var front = document.createElement('p');
+        front.className = 'editor-front';
+        front.textContent = card.front;
+        var back = document.createElement('p');
+        back.className = 'editor-back';
+        back.textContent = card.back;
+        text.appendChild(front);
+        text.appendChild(back);
+
+        var actions = document.createElement('div');
+        actions.className = 'editor-card-actions';
+        [['up', '↑', 'Move up: '], ['down', '↓', 'Move down: ']].forEach(function (m) {
+          var btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'btn btn-secondary btn-icon';
+          btn.setAttribute('data-action', m[0]);
+          btn.setAttribute('data-id', card.id);
+          btn.setAttribute('aria-label', m[2] + card.front);
+          btn.textContent = m[1];
+          btn.disabled = m[0] === 'up' ? pos === 0 : pos === topic.cardIndexes.length - 1;
+          actions.appendChild(btn);
+        });
+        var edit = document.createElement('button');
+        edit.type = 'button';
+        edit.className = 'btn btn-secondary btn-small';
+        edit.setAttribute('data-action', 'edit');
+        edit.setAttribute('data-id', card.id);
+        edit.setAttribute('aria-label', 'Edit: ' + card.front);
+        edit.textContent = 'Edit';
+        actions.appendChild(edit);
+
+        li.appendChild(text);
+        li.appendChild(actions);
+        ol.appendChild(li);
+      });
+      section.appendChild(ol);
+
+      var add = document.createElement('button');
+      add.type = 'button';
+      add.className = 'btn btn-ghost btn-small editor-add-here';
+      add.setAttribute('data-action', 'add');
+      add.setAttribute('data-topic', String(topic.order));
+      add.textContent = '+ Add a card to this topic';
+      section.appendChild(add);
+      list.appendChild(section);
+    });
+  }
+
+  function focusInEditor(selector) {
+    var target = el.editorList.querySelector(selector);
+    if (target && !target.disabled) target.focus();
+    else el.editorTitle.focus();
+  }
+
+  function moveCard(id, direction) {
+    var index = deck.findIndex(function (c) { return c.id === id; });
+    var card = deck[index];
+    var step = direction === 'up' ? -1 : 1;
+    var other = index + step;
+    if (other < 0 || other >= deck.length || deck[other].topicOrder !== card.topicOrder) return;
+    var list = deck.slice();
+    list[index] = list[other];
+    list[other] = card;
+    commitDeck(list);
+    renderEditor();
+    focusInEditor('[data-action="' + direction + '"][data-id="' + id + '"]');
+    announce('Moved ' + direction + '.');
+  }
+
+  function renameTopic(order, name) {
+    name = name.trim();
+    if (!name) return;
+    commitDeck(deck.map(function (c) {
+      return c.topicOrder === order
+        ? { id: c.id, topicOrder: c.topicOrder, topic: name, front: c.front, back: c.back }
+        : c;
+    }));
+    renamingTopic = null;
+    renderEditor();
+    focusInEditor('[data-action="rename"][data-topic="' + order + '"]');
+  }
+
+  function openCardForm(id, topicOrder) {
+    editingId = id;
+    var card = id ? deck.find(function (c) { return c.id === id; }) : null;
+    el.cardFormTitle.textContent = card ? 'Edit card' : 'Add a card';
+
+    el.cardTopic.textContent = '';
+    topics.forEach(function (topic) {
+      var option = document.createElement('option');
+      option.value = String(topic.order);
+      option.textContent = topic.name;
+      el.cardTopic.appendChild(option);
+    });
+    var newOption = document.createElement('option');
+    newOption.value = 'new';
+    newOption.textContent = 'New topic…';
+    el.cardTopic.appendChild(newOption);
+
+    var selected = card ? card.topicOrder : topicOrder || (topics[0] && topics[0].order);
+    el.cardTopic.value = selected ? String(selected) : 'new';
+    el.cardNewTopic.value = '';
+    el.newTopicField.hidden = el.cardTopic.value !== 'new';
+    el.cardFront.value = card ? card.front : '';
+    el.cardBack.value = card ? card.back : '';
+    el.cardFormError.textContent = '';
+    el.cardDeleteArea.hidden = !card;
+    el.cardDeleteConfirm.hidden = true;
+    el.cardDelete.setAttribute('aria-expanded', 'false');
+    showScreen('cardForm', el.cardFormTitle);
+  }
+
+  function newCardId(topicOrder) {
+    var prefix = (topicOrder < 10 ? '0' : '') + topicOrder + '-';
+    var n = deck.filter(function (c) { return c.topicOrder === topicOrder; }).length + 1;
+    var id;
+    do {
+      id = prefix + (n < 10 ? '0' : '') + n;
+      n += 1;
+    } while (deck.some(function (c) { return c.id === id; }));
+    return id;
+  }
+
+  function saveCardForm() {
+    var front = el.cardFront.value.trim();
+    // Keep the teacher's line breaks, but drop spaces at the ends of lines.
+    var back = el.cardBack.value.replace(/\r\n?/g, '\n').split('\n')
+      .map(function (line) { return line.trim(); }).join('\n').trim();
+    var topicValue = el.cardTopic.value;
+    var topicOrder;
+    var topicName;
+    if (topicValue === 'new') {
+      topicName = el.cardNewTopic.value.trim();
+      if (!topicName) return showFormError('Type a name for the new topic.', el.cardNewTopic);
+      topicOrder = deck.reduce(function (max, c) { return Math.max(max, c.topicOrder); }, 0) + 1;
+    } else {
+      topicOrder = Number(topicValue);
+      topicName = topicByOrder(topicOrder).name;
+    }
+    if (!front) return showFormError('Type the question for the front of the card.', el.cardFront);
+    if (!back) return showFormError('Type the answer for the back of the card.', el.cardBack);
+
+    var list = deck.slice();
+    var existing = editingId ? list.findIndex(function (c) { return c.id === editingId; }) : -1;
+    var card = {
+      id: existing >= 0 ? editingId : newCardId(topicOrder),
+      topicOrder: topicOrder,
+      topic: topicName,
+      front: front,
+      back: back
+    };
+    if (existing >= 0 && list[existing].topicOrder === topicOrder) {
+      list[existing] = card;
+    } else {
+      // New cards, and cards moved to another topic, go to the end of the topic.
+      if (existing >= 0) list.splice(existing, 1);
+      list.push(card);
+    }
+    commitDeck(list);
+    showEditor();
+    focusInEditor('[data-action="edit"][data-id="' + card.id + '"]');
+    announce(existing >= 0 ? 'Card saved.' : 'Card added.');
+  }
+
+  function showFormError(message, field) {
+    el.cardFormError.textContent = message;
+    field.focus();
+  }
+
+  function deleteCard() {
+    if (!editingId) return;
+    if (deck.length === 1) {
+      el.cardDeleteConfirm.hidden = true;
+      return showFormError('The app needs at least one card, so this card cannot be deleted.', el.cardFront);
+    }
+    commitDeck(deck.filter(function (c) { return c.id !== editingId; }));
+    editingId = null;
+    showEditor();
+    announce('Card deleted.');
+  }
+
+  function changePassword() {
+    var first = el.newPassword.value;
+    var second = el.newPasswordAgain.value;
+    el.passwordMessage.className = 'field-error';
+    if (first.length < 4) {
+      el.passwordMessage.textContent = 'Use at least 4 characters.';
+      el.newPassword.focus();
+      return;
+    }
+    if (first !== second) {
+      el.passwordMessage.textContent = 'The two passwords are different. Type them again.';
+      el.newPasswordAgain.value = '';
+      el.newPasswordAgain.focus();
+      return;
+    }
+    var hash = passwordHash(first);
+    edits.passwordHash = hash === builtInHash ? null : hash;
+    saveEdits();
+    el.newPassword.value = '';
+    el.newPasswordAgain.value = '';
+    el.passwordMessage.className = 'field-ok';
+    el.passwordMessage.textContent = PRISTINE_PAGE
+      ? 'Password changed on this device. Download the updated app to keep it in the file.'
+      : 'Password changed on this device. To keep it, run "node build-cards.js --set-password" with the new password.';
+    renderEditorSaveText();
+  }
+
+  function discardEdits() {
+    edits = { cards: null, passwordHash: null };
+    saveEdits();
+    setDeck(builtInDeck);
+    el.discardConfirm.hidden = true;
+    el.discardLink.setAttribute('aria-expanded', 'false');
+    renderEditor();
+    el.editorTitle.focus();
+    announce('All changes undone.');
+  }
+
+  // The data script of the single-file app, in the format build-cards.js writes.
+  function dataScriptText() {
+    var json = function (data) { return JSON.stringify(data, null, 2).replace(/<\//g, '<\\/'); };
+    return '\nwindow.CARDS_INLINE = true;\nwindow.CARDS = ' + json(deck.map(plainCard)) + ';\n' +
+      'window.CER_QUESTIONS = ' + json(rawCer) + ';\n' +
+      'window.EDITOR_PASSWORD_HASH = ' + JSON.stringify(currentPasswordHash()) + ';\n';
+  }
+
+  function saveFile(filename, text, type) {
+    var blob = new Blob([text], { type: type });
+    var url = URL.createObjectURL(blob);
+    var link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.setTimeout(function () { URL.revokeObjectURL(url); }, 10000);
+  }
+
+  function exportHtml() {
+    var page = PRISTINE_PAGE.cloneNode(true);
+    page.querySelector('#app-data').textContent = dataScriptText();
+    saveFile('p3-science-flashcards.html', '<!doctype html>\n' + page.outerHTML + '\n',
+      'text/html;charset=utf-8');
+    el.exportStatus.textContent = 'Downloaded p3-science-flashcards.html. Share this file with students. ' +
+      'Your changes stay on this device until you open the new file.';
+  }
+
+  function exportJson() {
+    saveFile('cards.json', JSON.stringify(deck.map(plainCard), null, 2) + '\n', 'application/json');
+    el.exportStatus.textContent = 'Downloaded cards.json.';
+  }
+
+  function bindEditorEvents() {
+    el.editorLink.addEventListener('click', openEditor);
+    el.editsOpen.addEventListener('click', openEditor);
+    el.unlockBack.addEventListener('click', goHome);
+    el.unlockForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (passwordHash(el.unlockPassword.value) === currentPasswordHash()) {
+        editorUnlocked = true;
+        el.unlockPassword.value = '';
+        showEditor();
+      } else {
+        el.unlockError.textContent = 'That password is not right. Try again.';
+        el.unlockPassword.value = '';
+        el.unlockPassword.focus();
+      }
+    });
+
+    el.editorBack.addEventListener('click', goHome);
+    el.editorLock.addEventListener('click', function () {
+      editorUnlocked = false;
+      goHome();
+    });
+    el.editorAdd.addEventListener('click', function () { openCardForm(null, null); });
+    el.exportHtml.addEventListener('click', exportHtml);
+    el.exportJson.addEventListener('click', exportJson);
+
+    el.editorList.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-action]');
+      if (!btn) return;
+      var action = btn.getAttribute('data-action');
+      var id = btn.getAttribute('data-id');
+      var order = Number(btn.getAttribute('data-topic'));
+      if (action === 'edit') openCardForm(id, null);
+      else if (action === 'up' || action === 'down') moveCard(id, action);
+      else if (action === 'add') openCardForm(null, order);
+      else if (action === 'rename') {
+        renamingTopic = order;
+        renderEditor();
+        var input = $('rename-input');
+        input.focus();
+        input.select();
+      } else if (action === 'rename-cancel') {
+        var was = renamingTopic;
+        renamingTopic = null;
+        renderEditor();
+        focusInEditor('[data-action="rename"][data-topic="' + was + '"]');
+      }
+    });
+    el.editorList.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var form = e.target.closest('.rename-form');
+      if (form) renameTopic(Number(form.getAttribute('data-topic')), $('rename-input').value);
+    });
+    el.editorList.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && renamingTopic !== null) {
+        var was = renamingTopic;
+        renamingTopic = null;
+        renderEditor();
+        focusInEditor('[data-action="rename"][data-topic="' + was + '"]');
+      }
+    });
+
+    el.passwordForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      changePassword();
+    });
+    el.discardLink.addEventListener('click', function () {
+      var opening = el.discardConfirm.hidden;
+      el.discardConfirm.hidden = !opening;
+      el.discardLink.setAttribute('aria-expanded', opening ? 'true' : 'false');
+      if (opening) el.discardNo.focus();
+    });
+    el.discardNo.addEventListener('click', function () {
+      el.discardConfirm.hidden = true;
+      el.discardLink.setAttribute('aria-expanded', 'false');
+      el.discardLink.focus();
+    });
+    el.discardYes.addEventListener('click', discardEdits);
+
+    el.cardTopic.addEventListener('change', function () {
+      el.newTopicField.hidden = el.cardTopic.value !== 'new';
+      if (!el.newTopicField.hidden) el.cardNewTopic.focus();
+    });
+    el.cardForm.addEventListener('input', function () { el.cardFormError.textContent = ''; });
+    el.cardForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      saveCardForm();
+    });
+    el.cardFormBack.addEventListener('click', function () { showEditor(); });
+    el.cardFormCancel.addEventListener('click', function () { showEditor(); });
+    el.cardDelete.addEventListener('click', function () {
+      var opening = el.cardDeleteConfirm.hidden;
+      el.cardDeleteConfirm.hidden = !opening;
+      el.cardDelete.setAttribute('aria-expanded', opening ? 'true' : 'false');
+      if (opening) el.cardDeleteNo.focus();
+    });
+    el.cardDeleteNo.addEventListener('click', function () {
+      el.cardDeleteConfirm.hidden = true;
+      el.cardDelete.setAttribute('aria-expanded', 'false');
+      el.cardDelete.focus();
+    });
+    el.cardDeleteYes.addEventListener('click', deleteCard);
+  }
+
   // ---------- Events ----------
 
   function bindEvents() {
     bindCerEvents();
+    bindEditorEvents();
 
     el.studyAll.addEventListener('click', function () { openScope('all'); });
 
@@ -3477,6 +4465,11 @@ window.CER_QUESTIONS = [
       loadData('cer-questions.json', 'CER_QUESTIONS')
     ]).then(function (data) {
       prepareCards(data[0]);
+      builtInDeck = cards.map(plainCard);
+      builtInHash = typeof window.EDITOR_PASSWORD_HASH === 'string' ? window.EDITOR_PASSWORD_HASH : '';
+      rawCer = data[1];
+      loadEdits();
+      setDeck(edits.cards || builtInDeck);
       prepareCer(data[1]);
       if (!cards.length) {
         el.overallProgress.textContent =

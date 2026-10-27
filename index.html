@@ -18,6 +18,11 @@
         <p class="lead" id="overall-progress">Pick a topic to start revising.</p>
       </header>
 
+      <div id="edits-notice" class="edits-notice" hidden>
+        <p>This device is showing edited flashcards that are not in the app file yet.</p>
+        <button type="button" id="edits-open" class="btn btn-secondary">Open the teacher editor</button>
+      </div>
+
       <div class="tabs" role="tablist" aria-label="Activities">
         <button type="button" role="tab" id="tab-cards" class="tab" aria-selected="true" aria-controls="panel-cards">Flashcards</button>
         <button type="button" role="tab" id="tab-cer" class="tab" aria-selected="false" aria-controls="panel-cer" tabindex="-1">CER practice</button>
@@ -62,6 +67,7 @@
           </div>
         </div>
         <p id="reset-done" class="reset-done" role="status"></p>
+        <button type="button" id="editor-link" class="link-btn">Teacher: edit flashcards</button>
       </div>
 
       <p id="storage-note" class="storage-note" hidden>Your progress can't be saved on this device right now, but you can still study.</p>
@@ -232,6 +238,101 @@
       <div class="btn-stack">
         <button type="button" id="cer-end-again" class="btn btn-primary btn-block">Practise again</button>
         <button type="button" id="cer-end-back" class="btn btn-ghost btn-block">Back to CER list</button>
+      </div>
+    </section>
+
+    <!-- Teacher editor: password -->
+    <section id="screen-unlock" class="screen screen-narrow" aria-labelledby="unlock-title" hidden>
+      <h2 id="unlock-title" tabindex="-1">Teacher editor</h2>
+      <p class="lead">Enter the teacher password to add or change flashcards.</p>
+      <form id="unlock-form" class="form-stack" novalidate>
+        <label for="unlock-password" class="field-label">Password</label>
+        <input id="unlock-password" class="field-input" type="password" autocomplete="current-password" aria-describedby="unlock-error">
+        <p id="unlock-error" class="field-error" role="alert"></p>
+        <button type="submit" class="btn btn-primary btn-block">Unlock</button>
+        <button type="button" id="unlock-back" class="btn btn-ghost btn-block">Back to topics</button>
+      </form>
+    </section>
+
+    <!-- Teacher editor: list of cards -->
+    <section id="screen-editor" class="screen" aria-labelledby="editor-title" hidden>
+      <div class="study-top">
+        <button type="button" id="editor-back" class="btn btn-ghost btn-back">
+          <span aria-hidden="true">←</span> Back to topics
+        </button>
+        <button type="button" id="editor-lock" class="btn btn-ghost btn-back">Lock editor</button>
+      </div>
+      <h2 id="editor-title" class="editor-title" tabindex="-1">Edit flashcards</h2>
+
+      <div class="editor-panel" id="editor-save">
+        <p id="editor-save-text"></p>
+        <div class="btn-row">
+          <button type="button" id="export-html" class="btn btn-primary">Download updated app</button>
+          <button type="button" id="export-json" class="btn btn-secondary">Download cards.json</button>
+        </div>
+        <p id="export-status" class="export-status" role="status"></p>
+      </div>
+
+      <button type="button" id="editor-add" class="btn btn-primary btn-block">+ Add a card</button>
+      <div id="editor-list" class="editor-list"></div>
+
+      <div class="editor-panel editor-settings">
+        <h3>Settings</h3>
+        <form id="password-form" class="form-stack" novalidate>
+          <p class="field-label">Change the teacher password</p>
+          <label for="new-password" class="field-label field-label-small">New password</label>
+          <input id="new-password" class="field-input" type="password" autocomplete="new-password">
+          <label for="new-password-again" class="field-label field-label-small">Type it again</label>
+          <input id="new-password-again" class="field-input" type="password" autocomplete="new-password">
+          <p id="password-message" class="field-error" role="status"></p>
+          <button type="submit" class="btn btn-secondary">Save new password</button>
+        </form>
+        <div class="discard-area">
+          <button type="button" id="discard-link" class="link-btn danger-link" aria-expanded="false" aria-controls="discard-confirm">Undo all my changes</button>
+          <div id="discard-confirm" class="reset-confirm" hidden>
+            <p id="discard-question"><strong>Undo all changes?</strong> This puts back the flashcards and password that came with this app file.</p>
+            <div class="btn-row">
+              <button type="button" id="discard-yes" class="btn btn-danger" aria-describedby="discard-question">Yes, undo</button>
+              <button type="button" id="discard-no" class="btn btn-secondary">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teacher editor: add or edit one card -->
+    <section id="screen-card-form" class="screen" aria-labelledby="card-form-title" hidden>
+      <div class="study-top">
+        <button type="button" id="card-form-back" class="btn btn-ghost btn-back">
+          <span aria-hidden="true">←</span> Back to editor
+        </button>
+      </div>
+      <h2 id="card-form-title" class="editor-title" tabindex="-1">Add a card</h2>
+      <form id="card-form" class="form-stack" novalidate>
+        <label for="card-topic" class="field-label">Topic</label>
+        <select id="card-topic" class="field-input"></select>
+        <div id="new-topic-field" class="form-stack" hidden>
+          <label for="card-new-topic" class="field-label">New topic name</label>
+          <input id="card-new-topic" class="field-input" type="text" placeholder="For example: Chapter 8: Light">
+        </div>
+        <label for="card-front" class="field-label">Question (front of the card)</label>
+        <textarea id="card-front" class="field-input" rows="3"></textarea>
+        <label for="card-back" class="field-label">Answer (back of the card)</label>
+        <p id="card-back-hint" class="field-hint">Press Enter to start a new line, for example for a list.</p>
+        <textarea id="card-back" class="field-input" rows="5" aria-describedby="card-back-hint"></textarea>
+        <p id="card-form-error" class="field-error" role="alert"></p>
+        <button type="submit" class="btn btn-primary btn-block">Save card</button>
+        <button type="button" id="card-form-cancel" class="btn btn-ghost btn-block">Cancel</button>
+      </form>
+      <div id="card-delete-area" class="discard-area">
+        <button type="button" id="card-delete" class="link-btn danger-link" aria-expanded="false" aria-controls="card-delete-confirm">Delete this card</button>
+        <div id="card-delete-confirm" class="reset-confirm" hidden>
+          <p id="card-delete-question"><strong>Delete this card?</strong> It will be removed from the app.</p>
+          <div class="btn-row">
+            <button type="button" id="card-delete-yes" class="btn btn-danger" aria-describedby="card-delete-question">Yes, delete</button>
+            <button type="button" id="card-delete-no" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
       </div>
     </section>
 
